@@ -11,32 +11,32 @@ import org.junit.Test;
 public class UserTest {
 
 	private Date	dob;
-	private User	c;
+	private User	user;
 
 	@Before
 	public void setUp() throws Exception {
 		dob = Date.valueOf("1985-05-01");
-		c = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", "111111");
+		user = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", "111111");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		c = null;
+		user = null;
 	}
 
 	@Test
 	public void testUserLongStringStringDateStringString() {
-		assertEquals(1l, c.getId());
-		assertEquals("Mike", c.getFirstName());
-		assertEquals("Cleary", c.getLastName());
-		assertEquals(dob, c.getDOB());
-		assertEquals("mike@cleary.net", c.getEmail());
-		assertEquals("111111", c.getPw());
+		assertEquals(1l, user.getId());
+		assertEquals("Mike", user.getFirstName());
+		assertEquals("Cleary", user.getLastName());
+		assertEquals(dob, user.getDOB());
+		assertEquals("mike@cleary.net", user.getEmail());
+		assertEquals("111111", user.getPw());
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("User[id=1, firstName='Mike', lastName='Cleary', dob='1985-05-01', email='mike@cleary.net', pw='111111']", c.toString());
+		assertEquals("User [id=1, firstName=Mike, lastName=Cleary, email=mike@cleary.net, pw=111111, dob=1985-05-01]", user.toString());
 	}
 
 }

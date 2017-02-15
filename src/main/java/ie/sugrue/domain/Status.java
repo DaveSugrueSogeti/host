@@ -2,6 +2,9 @@ package ie.sugrue.domain;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Status object is passed throughout the execution of a service and updated to the highest error code encountered along with a
  * corresponding message to the user. Error Code 0 - No errors encountered and service executed as expected. Error Code 1 - A business rule
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 public class Status {
 	private int					code		= 0;
 	private ArrayList<String>	messages	= new ArrayList<String>();
+	private final Logger		log			= LoggerFactory.getLogger(this.getClass());
 
 	public Status() {
 		updateStatus(0, "Success");

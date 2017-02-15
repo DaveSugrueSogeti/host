@@ -26,7 +26,7 @@ public class ConnectionJDBCTemplate implements UserDAO {
 	public void createUser(User user) {
 		String SQL = "insert into dotsdb.user ( firstName, lastName, dob, email, pw ) values (?, ?, ?, ?, ?)";
 
-		jdbcTemplateObject.update(SQL, user.getFirstName(), user.getLastName(), user.getFirstName(), user.getEmail(), user.getPw());
+		jdbcTemplateObject.update(SQL, user.getFirstName(), user.getLastName(), user.getDOB(), user.getEmail(), user.getPw());
 		log.debug("Created Record Name = " + user.getFirstName() + " " + user.getLastName());
 		return;
 	}
