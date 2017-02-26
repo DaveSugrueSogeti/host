@@ -20,14 +20,20 @@ public class User {
 		this.pw = pw;
 	}
 
-	public User(long id, String firstName, String lastName, String dobString, String email, String pw) {
-		Date dob = Date.valueOf(dobString);
-		this.id = id;
+	public User(String firstName, String lastName, Date dateOfBirth, String email, String pw) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dob = dob;
+		this.dob = dateOfBirth;
 		this.email = email;
 		this.pw = pw;
+	}
+
+	public User(long id, String firstName, String lastName, String dobString, String email, String pw) {
+		this(id, firstName, lastName, Date.valueOf(dobString), email, pw);
+	}
+
+	public User(String firstName, String lastName, String dobString, String email, String pw) {
+		this(firstName, lastName, Date.valueOf(dobString), email, pw);
 	}
 
 	public long getId() {

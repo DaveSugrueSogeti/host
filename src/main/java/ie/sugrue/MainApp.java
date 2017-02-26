@@ -24,7 +24,7 @@ public class MainApp implements CommandLineRunner {
 
 		System.out.println("------Starting Up--------");
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Context.xml");
 
 		ConnectionJDBCTemplate connectionJDBCTemplate = (ConnectionJDBCTemplate) context.getBean("ConnectionJDBCTemplate");
 
