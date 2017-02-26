@@ -19,7 +19,7 @@ import ie.sugrue.domain.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/test/resources/test-context.xml")
 @Rollback
-public class CreateUserServiceTest {
+public class CreateUserServiceImplTest {
 
 	private CreateUserService	createUser;
 	private Status				status;
@@ -27,7 +27,7 @@ public class CreateUserServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		createUser = new CreateUserService();
+		createUser = new CreateUserServiceImpl();
 		status = new Status();
 	}
 

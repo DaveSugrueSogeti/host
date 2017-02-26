@@ -17,6 +17,7 @@ import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.Status;
 import ie.sugrue.domain.User;
 import ie.sugrue.service.user.CreateUserService;
+import ie.sugrue.service.user.CreateUserServiceImpl;
 
 @CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
 
@@ -71,9 +72,9 @@ public class UserController extends PrimaryController {
 	public ResponseWrapper create(@RequestBody User user) {
 		log.info("Here is my user object -> {}", user);
 		ResponseWrapper resp = new ResponseWrapper();
-		CreateUserService createUserService = new CreateUserService();
+		CreateUserService createUserServiceImpl = new CreateUserServiceImpl();
 
-		resp.setStatus(createUserService.createUser(user, resp.getStatus()));
+		resp.setStatus(createUserServiceImpl.createUser(user, resp.getStatus()));
 
 		log.info("Returning :: {}", resp);
 		return resp;

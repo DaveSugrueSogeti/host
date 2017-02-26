@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ie.sugrue.utils.ConnectionJDBCTemplate;
 
-public class Service {
-	private ApplicationContext			context					= new ClassPathXmlApplicationContext("context.xml");
-	protected ConnectionJDBCTemplate	connectionJDBCTemplate	= (ConnectionJDBCTemplate) context.getBean("ConnectionJDBCTemplate");
+public interface Service {
+	final ApplicationContext		context					= new ClassPathXmlApplicationContext("context.xml");
+	final ConnectionJDBCTemplate	connectionJDBCTemplate	= (ConnectionJDBCTemplate) context.getBean("ConnectionJDBCTemplate");
 }
