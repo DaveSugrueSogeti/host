@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
-import ie.sugrue.repository.MySQLUserRepositoryImpl;
-import ie.sugrue.utils.LoginUtils;
+import ie.sugrue.service.login.LoginService;
+import ie.sugrue.service.login.LoginServiceImpl;
 
 @CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
 
@@ -20,10 +20,11 @@ public class LoginController extends PrimaryController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseWrapper login(@RequestBody User user) {
 		System.out.println("validating for email = '" + user.getEmail() + "' and pw = '" + user.getPw() + "'");
-		MySQLUserRepositoryImpl mySQLUserRepositoryImpl = (MySQLUserRepositoryImpl) context.getBean("MySQLUserRepositoryImpl");
 
-		User storedUser = mySQLUserRepositoryImpl.getUser(user.getEmail());
+		LoginService loginServiceImpl = new LoginServiceImpl();
 
-		return LoginUtils.validateLogin(storedUser, user.getPw());
+		ResponseWrapper resp = new ResponseWrapper();
+
+		return loginServiceImpl.login(resp, user);
 	}
 }
