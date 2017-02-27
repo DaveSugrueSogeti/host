@@ -16,7 +16,7 @@ public class CreateUserServiceImpl implements CreateUserService {
 	public Status createUser(User user, Status status) {
 
 		try {
-			connectionJDBCTemplate.createUser(user);
+			mySQLUserRepositoryImpl.createUser(user);
 		} catch (DuplicateKeyException dk) {
 			log.info("Duplicate key on email address: {}", user.getEmail());
 			status.updateStatus(1, "The email address '" + user.getEmail() + "' is already in use.");

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ie.sugrue.domain.Greeting;
 import ie.sugrue.domain.ResponseWrapper;
-import ie.sugrue.domain.Status;
 import ie.sugrue.domain.User;
 import ie.sugrue.service.user.CreateUserService;
 import ie.sugrue.service.user.CreateUserServiceImpl;
+import ie.sugrue.service.user.GetUserService;
+import ie.sugrue.service.user.GetUserServiceImpl;
 
 @CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
 
@@ -28,28 +28,17 @@ public class UserController extends PrimaryController {
 
 	@RequestMapping("")
 	public ResponseWrapper user(@RequestParam(value = "id", defaultValue = "1") long id) {
-		// public ResponseWrapper user(@PathVariable long id) {
 
-		log.info("IN HERE");
 		ResponseWrapper resp = new ResponseWrapper();
 
-		try {
-			User user = connectionJDBCTemplate.getUser(id);
-			Greeting greeting = new Greeting(5, "Hell ya");
+		GetUserService getUserServiceImpl = new GetUserServiceImpl();
 
-			resp.addObject(user);
-			resp.addObject(greeting);
-		} catch (Exception e) {
-			Status status = new Status(2, "Problem getting User data from DB");
-			resp.setStatus(status);
-		}
-
-		return resp;
+		return getUserServiceImpl.getUser(resp, id);
 	}
 
 	@RequestMapping("/user/delete")
 	public long deleteUser(@RequestParam(value = "id", defaultValue = "1") long id) {
-		connectionJDBCTemplate.deleteUser(id);
+		mySQLUserRepositoryImpl.deleteUser(id);
 
 		return id;
 	}
@@ -58,13 +47,13 @@ public class UserController extends PrimaryController {
 	public void updateUser(@ModelAttribute User user, Model model) {
 		System.out.println("Posting...");
 		model.addAttribute("user", user);
-		connectionJDBCTemplate.updateUser(user);
+		mySQLUserRepositoryImpl.updateUser(user);
 		return;
 	}
 
 	/*
 	 * @RequestMapping(value = "/user/create", method = RequestMethod.POST) public void createUser(@ModelAttribute User user, Model model) {
-	 * System.out.println("Posting..."); model.addAttribute("user", user); connectionJDBCTemplate.createUser(user); return; }
+	 * System.out.println("Posting..."); model.addAttribute("user", user); MySQLUserRepositoryImpl.createUser(user); return; }
 	 */
 
 	@RequestMapping(value = "/create", method = RequestMethod.PUT)

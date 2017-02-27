@@ -13,8 +13,8 @@
       <property name="password" value="letMeIn"/>
    </bean>
 
-   <!-- Definition for ConnectionJDBCTemplate bean -->
-   <bean id="ConnectionJDBCTemplate" class="ie.sugrue.utils.ConnectionJDBCTemplate">
+   <!-- Definition for MySQLUserRepositoryImpl bean -->
+   <bean id="MySQLUserRepositoryImpl" class="ie.sugrue.repository.MySQLUserRepositoryImpl">
       <property name="dataSource"  ref="dataSource" />    
    </bean>
       

@@ -1,4 +1,4 @@
-package ie.sugrue.utils;
+package ie.sugrue.repository;
 
 import java.util.List;
 
@@ -9,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import ie.sugrue.domain.User;
-import ie.sugrue.repository.UserDAO;
-import ie.sugrue.repository.UserMapper;
 
-public class ConnectionJDBCTemplate implements UserDAO {
+public class MySQLUserRepositoryImpl implements UserRepository {
 	private DataSource		dataSource;
 	private JdbcTemplate	jdbcTemplateObject;
 

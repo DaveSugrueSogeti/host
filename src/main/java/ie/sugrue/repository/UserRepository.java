@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 
 import ie.sugrue.domain.User;
 
-public interface UserDAO {
+public interface UserRepository {
 	/**
 	 * This is the method to be used to initialize database resources ie.
 	 * connection.
