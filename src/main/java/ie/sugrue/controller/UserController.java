@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +26,11 @@ public class UserController extends PrimaryController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	// public ResponseWrapper user(@RequestParam(value = "id", defaultValue =
-	// "1") long id) {
-	public ResponseWrapper user(@PathVariable long id) {
+	@RequestMapping("")
+	public ResponseWrapper user(@RequestParam(value = "id", defaultValue = "1") long id) {
+		// public ResponseWrapper user(@PathVariable long id) {
 
+		log.info("IN HERE");
 		ResponseWrapper resp = new ResponseWrapper();
 
 		try {
@@ -64,8 +63,8 @@ public class UserController extends PrimaryController {
 	}
 
 	/*
-	 * @RequestMapping(value = "/user/create", method = RequestMethod.POST) public void createUser(@ModelAttribute User user, Model model) { System.out.println("Posting...");
-	 * model.addAttribute("user", user); connectionJDBCTemplate.createUser(user); return; }
+	 * @RequestMapping(value = "/user/create", method = RequestMethod.POST) public void createUser(@ModelAttribute User user, Model model) {
+	 * System.out.println("Posting..."); model.addAttribute("user", user); connectionJDBCTemplate.createUser(user); return; }
 	 */
 
 	@RequestMapping(value = "/create", method = RequestMethod.PUT)
