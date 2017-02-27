@@ -17,9 +17,14 @@
       <property name="password" value="${dbPassword}"/>
    </bean>
 
+   <!-- Definition for JDBCConnectionTemplate bean -->
+   <bean id="JDBCConnectionTemplate" class="ie.sugrue.repository.JDBCConnectionTemplate">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
    <!-- Definition for MySQLUserRepositoryImpl bean -->
    <bean id="MySQLUserRepositoryImpl" class="ie.sugrue.repository.MySQLUserRepositoryImpl">
-      <property name="dataSource"  ref="dataSource" />    
+   		<property name="dataSource"  ref="dataSource" />   
    </bean>
       
 </beans>
