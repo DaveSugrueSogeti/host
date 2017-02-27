@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import ie.sugrue.domain.User;
-import ie.sugrue.persistence.UserDAO;
-import ie.sugrue.persistence.UserMapper;
+import ie.sugrue.repository.UserDAO;
+import ie.sugrue.repository.UserMapper;
 
 public class ConnectionJDBCTemplate implements UserDAO {
 	private DataSource		dataSource;

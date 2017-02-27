@@ -1,4 +1,4 @@
-package ie.sugrue.persistence;
+package ie.sugrue.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
