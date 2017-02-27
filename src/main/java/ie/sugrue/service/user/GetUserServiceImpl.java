@@ -13,8 +13,8 @@ public class GetUserServiceImpl implements GetUserService {
 
 	@Override
 	public User getUser(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO catch exceptions
+		return mySQLUserRepositoryImpl.getUser(id);
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class GetUserServiceImpl implements GetUserService {
 
 	@Override
 	public User getUser(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO catch exceptions
+		return mySQLUserRepositoryImpl.getUser(email);
 	}
 
 	@Override
