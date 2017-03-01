@@ -2,33 +2,41 @@ package ie.sugrue.service.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
 
-import ie.sugrue.domain.Status;
+import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 
+@Service("creatueUserService")
+@Scope("prototype")
 public class CreateUserServiceImpl implements CreateUserService {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private final Logger	log	= LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	ResponseWrapper			resp;
 
 	@Override
-	public Status createUser(User user, Status status) {
+	public ResponseWrapper createUser(ResponseWrapper resp, User user) {
 
 		try {
 			mySQLUserRepositoryImpl.createUser(user);
 		} catch (DuplicateKeyException dk) {
 			log.info("Duplicate key on email address: {}", user.getEmail());
-			status.updateStatus(1, "The email address '" + user.getEmail() + "' is already in use.");
+			resp.getStatus().updateStatus(1, "The email address '" + user.getEmail() + "' is already in use.");
 		} catch (DataAccessException dae) {
 			log.error("Data Access exception encountered trying to save {} to Database", user, dae);
-			status.updateStatus(2, "We encountered a problem storing your details to our database. Please try again.");
+			resp.getStatus().updateStatus(2, "We encountered a problem storing your details to our database. Please try again.");
 		} catch (Exception e) {
 			log.error("Unknown exception encountered trying to save {} to Database", user, e);
-			status.updateStatus(2, "We encountered a problem storing your details to our database. Please try again.");
+			resp.getStatus().updateStatus(2, "We encountered a problem storing your details to our database. Please try again.");
 		}
 
-		return status;
+		return resp;
 	}
 
 }

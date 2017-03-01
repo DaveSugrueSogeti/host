@@ -2,11 +2,15 @@ package ie.sugrue.service.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.Status;
 import ie.sugrue.domain.User;
 
+@Service("loginService")
+@Scope("prototype")
 public class LoginServiceImpl implements LoginService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());

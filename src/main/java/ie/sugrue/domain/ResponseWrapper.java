@@ -5,13 +5,18 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
- * Used by all services to wrap a response being sent back to a client. It always contains a status object and then an array of objects to be returned to the client
+ * Used by all services to wrap a response being sent back to a client. It always contains a status object and then an array of objects to
+ * be returned to the client
  * 
  * @author Dave Sugrue
  *
  */
+@Component
+@Scope(value = "prototype")
 public class ResponseWrapper {
 	private Status			status	= new Status();
 	private List			objects	= new ArrayList();

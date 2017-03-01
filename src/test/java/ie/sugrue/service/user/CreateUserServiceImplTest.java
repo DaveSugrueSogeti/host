@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import ie.sugrue.domain.Status;
+import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,29 +22,29 @@ import ie.sugrue.domain.User;
 public class CreateUserServiceImplTest {
 
 	private CreateUserService	createUser;
-	private Status				status;
+	private ResponseWrapper		resp;
 	private final Logger		log	= LoggerFactory.getLogger(this.getClass());
 
 	@Before
 	public void setUp() throws Exception {
 		createUser = new CreateUserServiceImpl();
-		status = new Status();
+		resp = new ResponseWrapper();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		createUser = null;
-		status = null;
+		resp = null;
 	}
 
 	@Test
 	@Transactional
 	public void testCreateUser() {
 		User user = new User(1l, "Mike", "Cleary", "1981-01-01", "mike99@cleary.net", "111111");
-		status = createUser.createUser(user, status);
-		assertEquals(0, status.getCode());
-		status = createUser.createUser(user, status);
-		assertEquals(1, status.getCode());
-		assertEquals("The email address 'mike99@cleary.net' is already in use.", status.getMessages().get(0));
+		resp = createUser.createUser(resp, user);
+		assertEquals(0, resp.getStatus().getCode());
+		resp = createUser.createUser(resp, user);
+		assertEquals(1, resp.getStatus().getCode());
+		assertEquals("The email address 'mike99@cleary.net' is already in use.", resp.getStatus().getMessages().get(0));
 	}
 }

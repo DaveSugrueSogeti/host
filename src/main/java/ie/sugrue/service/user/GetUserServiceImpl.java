@@ -2,11 +2,15 @@ package ie.sugrue.service.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.Status;
 import ie.sugrue.domain.User;
 
+@Service("getUserService")
+@Scope("prototype")
 public class GetUserServiceImpl implements GetUserService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
