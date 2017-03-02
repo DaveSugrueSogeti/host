@@ -41,7 +41,7 @@ public class UserController extends PrimaryController {
 
 	@RequestMapping("/user/delete")
 	public long deleteUser(@RequestParam(value = "id", defaultValue = "1") long id) {
-		mySQLUserRepositoryImpl.deleteUser(id);
+		// mySQLUserRepositoryImpl.deleteUser(id);
 
 		return id;
 	}
@@ -50,7 +50,7 @@ public class UserController extends PrimaryController {
 	public void updateUser(@ModelAttribute User user, Model model) {
 		System.out.println("Posting...");
 		model.addAttribute("user", user);
-		mySQLUserRepositoryImpl.updateUser(user);
+		// mySQLUserRepositoryImpl.updateUser(user);
 		return;
 	}
 
