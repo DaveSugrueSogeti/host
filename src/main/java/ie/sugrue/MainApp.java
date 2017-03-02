@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ie.sugrue.domain.Tester1;
 import ie.sugrue.domain.User;
@@ -24,9 +22,9 @@ public class MainApp implements CommandLineRunner {
 
 		System.out.println("------Starting Up--------");
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("Context.xml");
+		// ApplicationContext context = new ClassPathXmlApplicationContext("Context.xml");
 
-		MySQLUserRepositoryImpl mySQLUserRepositoryImpl = (MySQLUserRepositoryImpl) context.getBean("MySQLUserRepositoryImpl");
+		// MySQLUserRepositoryImpl mySQLUserRepositoryImpl = (MySQLUserRepositoryImpl) context.getBean("MySQLUserRepositoryImpl");
 
 		// popUsers(mySQLUserRepositoryImpl);
 

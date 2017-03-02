@@ -6,6 +6,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ie.sugrue.repository.MySQLUserRepositoryImpl;
 
 public interface Service {
-	final ApplicationContext		context					= new ClassPathXmlApplicationContext("context.xml");
+	final ApplicationContext		context					= new ClassPathXmlApplicationContext("application-context.xml");
 	final MySQLUserRepositoryImpl	mySQLUserRepositoryImpl	= (MySQLUserRepositoryImpl) context.getBean("MySQLUserRepositoryImpl");
 }
