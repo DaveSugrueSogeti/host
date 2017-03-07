@@ -20,6 +20,8 @@ public interface UserRepository {
 	 */
 	public User getUser(long id);
 
+	public User getUser(String email);
+
 	/**
 	 * This is the method to be used to list down all the records from the user table.
 	 */

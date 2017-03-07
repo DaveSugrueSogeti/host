@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
+import ie.sugrue.repository.UserRepository;
 
 @Service("creatueUserService")
 @Scope("prototype")
@@ -20,11 +21,14 @@ public class CreateUserServiceImpl implements CreateUserService {
 	@Autowired
 	ResponseWrapper			resp;
 
+	@Autowired
+	private UserRepository	userRepo;
+
 	@Override
 	public ResponseWrapper createUser(ResponseWrapper resp, User user) {
 
 		try {
-			mySQLUserRepositoryImpl.createUser(user);
+			userRepo.createUser(user);
 		} catch (DuplicateKeyException dk) {
 			log.info("Duplicate key on email address: {}", user.getEmail());
 			resp.getStatus().updateStatus(1, "The email address '" + user.getEmail() + "' is already in use.");

@@ -2,23 +2,28 @@ package ie.sugrue.service.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.Status;
 import ie.sugrue.domain.User;
+import ie.sugrue.repository.UserRepository;
 
 @Service("loginService")
 @Scope("prototype")
 public class LoginServiceImpl implements LoginService {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private final Logger	log	= LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private UserRepository	userRepo;
 
 	@Override
 	public ResponseWrapper login(ResponseWrapper resp, User user) {
 
-		User storedUser = mySQLUserRepositoryImpl.getUser(user.getEmail());
+		User storedUser = userRepo.getUser(user.getEmail());
 
 		if (validateLogin(user.getPw(), storedUser.getPw())) {
 			resp.addObject(storedUser);

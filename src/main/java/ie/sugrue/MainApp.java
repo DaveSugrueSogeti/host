@@ -2,19 +2,26 @@ package ie.sugrue;
 
 import java.util.List;
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import ie.sugrue.domain.Tester1;
 import ie.sugrue.domain.User;
 import ie.sugrue.repository.MySQLUserRepositoryImpl;
 
-@SpringBootApplication
+@EnableAutoConfiguration
+@Configuration
+@ComponentScan
 public class MainApp implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MainApp.class, args);
+		SpringApplication app = new SpringApplication(MainApp.class);
+		app.setBannerMode(Banner.Mode.OFF);
+		app.run(args);
 	}
 
 	@Override

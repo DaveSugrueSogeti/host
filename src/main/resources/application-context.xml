@@ -9,35 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-    <mvc:annotation-driven />
-
-
-	<bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	    <property name="locations" value="classpath:application.properties"/>
-	</bean>
-
-	<!-- Initialization for data source -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="${dbURL}"/>
-		<property name="username" value="${dbUsername}"/>
-		<property name="password" value="${dbPassword}"/>
-	</bean>
-		
-	<!-- Definition for JDBCConnectionTemplate bean -->
-	<bean id="JDBCConnectionTemplate" class="ie.sugrue.repository.JDBCConnectionTemplate">
-		<property name="dataSource"  ref="dataSource" />    
-	</bean>
-		
-	<!-- Definition for MySQLUserRepositoryImpl bean -->
-	<bean id="MySQLUserRepositoryImpl" class="ie.sugrue.repository.MySQLUserRepositoryImpl">
-		<property name="dataSource"  ref="dataSource" />   
-	</bean>
+    <context:annotation-config/>
 	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref= "dataSource" />
-	</bean>
-	
-	<tx:annotation-driven />
 	
 </beans>
