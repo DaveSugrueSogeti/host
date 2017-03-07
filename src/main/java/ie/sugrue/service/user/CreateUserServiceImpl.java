@@ -12,7 +12,7 @@ import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 import ie.sugrue.repository.UserRepository;
 
-@Service("createUserService")
+@Service("creatueUserService")
 @Scope("prototype")
 public class CreateUserServiceImpl implements CreateUserService {
 
