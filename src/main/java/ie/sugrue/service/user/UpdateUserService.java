@@ -3,8 +3,8 @@ package ie.sugrue.service.user;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 
-public interface CreateUserService {
+public interface UpdateUserService {
 
-	ResponseWrapper createUser(ResponseWrapper resp, User user);
+	ResponseWrapper updateUser(ResponseWrapper resp, User user);
 
 }

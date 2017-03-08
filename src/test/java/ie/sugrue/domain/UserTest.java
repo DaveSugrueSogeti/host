@@ -1,6 +1,8 @@
 package ie.sugrue.domain;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Date;
 
@@ -39,4 +41,31 @@ public class UserTest {
 		assertEquals("User [id=1, firstName=Mike, lastName=Cleary, email=mike@cleary.net, pw=111111, dob=1985-05-01]", user.toString());
 	}
 
+	@Test
+	public void testEqualsWhereEqualNoNulls() {
+		User user1 = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", "111111");
+		User user2 = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", "111111");
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testEqualsWhereEqualWithNulls() {
+		User user1 = new User(1l, null, "Cleary", dob, "mike@cleary.net", "111111");
+		User user2 = new User(1l, null, "Cleary", dob, "mike@cleary.net", "111111");
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testEqualsWhereNotEqualNoNulls() {
+		User user1 = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", "111111");
+		User user2 = new User(1l, "John", "Cleary", dob, "mike@cleary.net", "111111");
+		assertFalse(user1.equals(user2));
+	}
+
+	@Test
+	public void testEqualsWhereNotEqualWithNulls() {
+		User user1 = new User(1l, null, "Cleary", dob, "mike@cleary.net", "111111");
+		User user2 = new User(1l, "Mike", "Cleary", dob, "mike@cleary.net", null);
+		assertFalse(user1.equals(user2));
+	}
 }

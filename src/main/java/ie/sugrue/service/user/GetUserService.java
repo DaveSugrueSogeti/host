@@ -2,9 +2,8 @@ package ie.sugrue.service.user;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
-import ie.sugrue.service.Service;
 
-public interface GetUserService extends Service {
+public interface GetUserService {
 
 	public User getUser(long id);
 

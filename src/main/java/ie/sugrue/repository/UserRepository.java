@@ -32,6 +32,8 @@ public interface UserRepository {
 	 */
 	public void deleteUser(long id);
 
+	public void deleteUser(String email);
+
 	/**
 	 * This is the method to be used to update a record into the user table.
 	 */
