@@ -52,8 +52,6 @@ public class DeleteUserServiceImplTest {
 
 	@After
 	public void tearDown() throws Exception {
-		getUserServiceImpl = null;
-		resp = null;
 		ScriptUtils.executeSqlScript(jdbc.getDataSource().getConnection(), new ClassPathResource(DROP_USER_TABLE_SCRIPT));
 	}
 

@@ -16,7 +16,6 @@ import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
@@ -51,8 +50,6 @@ public class CreateUserServiceImplTest {
 	}
 
 	@Test
-	@Transactional
-	@Rollback
 	public void testCreateUser() {
 		User user = new User(1l, "Mike", "Cleary", "1981-01-01", "mike99@cleary.net", "111111");
 		resp = createUserServiceImpl.createUser(resp, user);

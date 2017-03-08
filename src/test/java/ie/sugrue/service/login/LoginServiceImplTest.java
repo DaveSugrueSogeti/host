@@ -1,7 +1,8 @@
-package ie.sugrue.service.user;
+package ie.sugrue.service.login;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,16 +20,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
+import ie.sugrue.service.user.CreateUserService;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration("file:src/test/resources/application-context.xml")
 @SpringBootTest
-public class GetUserServiceImplTest {
+public class LoginServiceImplTest {
 
 	@Autowired
 	CreateUserService			createUserServiceImpl;
 	@Autowired
-	GetUserService				getUserServiceImpl;
+	LoginService				loginServiceImpl;
 	@Autowired
 	private ResponseWrapper		resp;
 	@Autowired
@@ -55,50 +57,33 @@ public class GetUserServiceImplTest {
 	}
 
 	@Test
-	public void testGetUserByEMail() {
-		User retrievedUser = new User();
-
-		retrievedUser = getUserServiceImpl.getUser("mike99@cleary.net");
-		assertEquals(user, retrievedUser);
-
-		retrievedUser = getUserServiceImpl.getUser("nobody@here.ie");
-		assertNull("User should be null", retrievedUser.getEmail());
+	public void testValidateLogin() {
+		String pass1 = "password1";
+		String pass2 = "password1";
+		assertTrue(loginServiceImpl.validateLogin(pass1, pass2));
+		pass2 = "password2";
+		assertFalse(loginServiceImpl.validateLogin(pass1, pass2));
 	}
 
 	@Test
-	public void testGetUserResponseByEMail() {
-		User retrievedUser = new User();
-
-		resp = getUserServiceImpl.getUser(resp, "mike99@cleary.net");
+	public void testLoginValidPassword() {
+		resp = loginServiceImpl.login(resp, user);
 		assertEquals(0, resp.getStatus().getCode());
-		retrievedUser = (User) resp.getObject().get(0);
-		assertEquals(user, retrievedUser);
-
-		resp = getUserServiceImpl.getUser(resp, "nobody@here.ie");
-		assertEquals(1, resp.getStatus().getCode());
 	}
 
 	@Test
-	public void testGetUserById() {
-		User retrievedUser = new User();
-
-		retrievedUser = getUserServiceImpl.getUser(1l);
-		assertEquals(user, retrievedUser);
-
-		retrievedUser = getUserServiceImpl.getUser(2l);
-		assertEquals(0l, retrievedUser.getId());
+	public void testLoginInvalidPassword() {
+		user.setPw("222222");
+		resp = loginServiceImpl.login(resp, user);
+		assertEquals(1, resp.getStatus().getCode());
+		assertEquals("Username or Password are incorrect. Please try again", resp.getStatus().getMessages().get(0));
 	}
 
 	@Test
-	public void testGetUserResponseById() {
-		User retrievedUser = new User();
-
-		resp = getUserServiceImpl.getUser(resp, 1l);
-		assertEquals(0, resp.getStatus().getCode());
-		retrievedUser = (User) resp.getObject().get(0);
-		assertEquals(user, retrievedUser);
-
-		resp = getUserServiceImpl.getUser(resp, 2l);
+	public void testLoginNoUser() {
+		user = new User(1l, "Nobody", "Here", "1981-01-01", "nobody@here.net", "111111");
+		resp = loginServiceImpl.login(resp, user);
 		assertEquals(1, resp.getStatus().getCode());
+		assertEquals("User does not exist. Please try again", resp.getStatus().getMessages().get(0));
 	}
 }
