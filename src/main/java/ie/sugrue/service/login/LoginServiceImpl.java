@@ -30,7 +30,6 @@ public class LoginServiceImpl implements LoginService {
 				resp.addObject(storedUser);
 			} else {
 				resp.getStatus().updateStatus(1, "Username or Password are incorrect. Please try again");
-				resp.addObject(user);
 			}
 		} catch (EmptyResultDataAccessException empty) {
 			resp.getStatus().updateStatus(1, "User does not exist. Please try again");
