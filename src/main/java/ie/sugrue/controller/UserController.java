@@ -4,9 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 import ie.sugrue.service.user.CreateUserService;
+import ie.sugrue.service.user.DeleteUserService;
 import ie.sugrue.service.user.GetUserService;
+import ie.sugrue.service.user.UpdateUserService;
 
 @CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
 
@@ -30,28 +30,17 @@ public class UserController extends PrimaryController {
 	@Autowired
 	ResponseWrapper			resp;
 	@Autowired
-	CreateUserService		createUserServiceImpl;
+	GetUserService			getUserService;
 	@Autowired
-	GetUserService			getUserServiceImpl;
+	CreateUserService		createUserService;
+	@Autowired
+	UpdateUserService		updateUserService;
+	@Autowired
+	DeleteUserService		deleteUserService;
 
 	@RequestMapping("")
 	public ResponseWrapper user(@RequestParam(value = "id", defaultValue = "1") long id) {
-		return getUserServiceImpl.getUser(resp, id);
-	}
-
-	@RequestMapping("/user/delete")
-	public long deleteUser(@RequestParam(value = "id", defaultValue = "1") long id) {
-		// mySQLUserRepositoryImpl.deleteUser(id);
-
-		return id;
-	}
-
-	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
-	public void updateUser(@ModelAttribute User user, Model model) {
-		System.out.println("Posting...");
-		model.addAttribute("user", user);
-		// mySQLUserRepositoryImpl.updateUser(user);
-		return;
+		return getUserService.getUser(resp, id);
 	}
 
 	/*
@@ -61,9 +50,21 @@ public class UserController extends PrimaryController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.PUT)
 	public ResponseWrapper create(@RequestBody User user) {
-		log.info("Here is my user object -> {}", user);
+		log.info("CREATING -> {}", user);
 
-		return createUserServiceImpl.createUser(resp, user);
+		return createUserService.createUser(resp, user);
 	}
 
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ResponseWrapper updateUser(@RequestBody User user) {
+		log.info("UPDATING -> {}", user);
+
+		return updateUserService.updateUser(resp, user);
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public ResponseWrapper deleteUser(@RequestBody User user) {
+		log.info("DELETING -> {}", user);
+		return deleteUserService.deleteUser(resp, user);
+	}
 }

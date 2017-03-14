@@ -59,14 +59,21 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 	}
 
 	public User updateUser(User user) {
-		user = populateUserNullsWithdefaults(user);
+		// user = populateUserNullsWithdefaults(user);
 
-		String SQL = "update appUser set firstName = ?, lastName = ?, dob = ?, email = ?, pw = ? where id = ?";
+		String SQL = "update appUser set firstName = ?, lastName = ?, dob = ?, email = ?, pw = ?";
 
-		jdbc.update(SQL, user.getFirstName(), user.getLastName(), user.getDOB(), user.getEmail(), user.getPw(), user.getId());
-
+		if (user.getId() > 0) {
+			SQL += " where id = ?";
+			jdbc.update(SQL, user.getFirstName(), user.getLastName(), user.getDOB(), user.getEmail(), user.getPw(), user.getId());
+			user = getUser(user.getId());
+		} else {
+			SQL += " where email = ?";
+			jdbc.update(SQL, user.getFirstName(), user.getLastName(), user.getDOB(), user.getEmail(), user.getPw(), user.getEmail());
+			user = getUser(user.getEmail());
+		}
 		log.debug("Updated Record with ID = " + user.getId());
-		return getUser(user.getId());
+		return user;
 	}
 
 	private User populateUserNullsWithdefaults(User user) {
