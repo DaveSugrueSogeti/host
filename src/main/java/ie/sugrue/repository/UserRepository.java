@@ -1,6 +1,6 @@
 package ie.sugrue.repository;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import ie.sugrue.domain.User;
 
@@ -25,7 +25,7 @@ public interface UserRepository {
 	/**
 	 * This is the method to be used to list down all the records from the user table.
 	 */
-	public List<User> listUsers();
+	public ArrayList<User> getUsers();
 
 	/**
 	 * This is the method to be used to delete a record from the user table corresponding to a passed student id.

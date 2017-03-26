@@ -1,6 +1,6 @@
 package ie.sugrue.repository;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 	protected JdbcTemplate	jdbc;
 
 	public void createUser(User user) {
-		String SQL = "insert into appUser ( firstName, lastName, dob, email, pw ) values (?, ?, ?, ?, ?)";
+		String SQL = "insert into app_user ( firstName, lastName, dob, email, pw ) values (?, ?, ?, ?, ?)";
 
 		jdbc.update(SQL, user.getFirstName(), user.getLastName(), user.getDOB(), user.getEmail(), user.getPw());
 		log.debug("Created Record Name = " + user.getFirstName() + " " + user.getLastName());
@@ -27,32 +27,33 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 	}
 
 	public User getUser(long id) {
-		String SQL = "select * from appUser where id = ?";
+		String SQL = "select * from app_user where id = ?";
 		User user = jdbc.queryForObject(SQL, new Object[] { id }, new UserMapper());
 		return user;
 	}
 
 	public User getUser(String emailAddress) {
-		String SQL = "select * from appUser where email = ?";
+		String SQL = "select * from app_user where email = ?";
 		User user = jdbc.queryForObject(SQL, new Object[] { emailAddress }, new UserMapper());
 		return user;
 	}
 
-	public List<User> listUsers() {
-		String SQL = "select * from appUser";
-		List<User> users = jdbc.query(SQL, new UserMapper());
+	public ArrayList<User> getUsers() {
+		String SQL = "select * from app_user";
+		ArrayList<User> users = new ArrayList<User>();
+		users.addAll(jdbc.query(SQL, new UserMapper()));
 		return users;
 	}
 
 	public void deleteUser(long id) {
-		String SQL = "delete from appUser where id = ?";
+		String SQL = "delete from app_user where id = ?";
 		jdbc.update(SQL, id);
 		log.debug("Deleted Record with ID = " + id);
 		return;
 	}
 
 	public void deleteUser(String email) {
-		String SQL = "delete from appUser where email = ?";
+		String SQL = "delete from app_user where email = ?";
 		jdbc.update(SQL, email);
 		log.debug("Deleted Record with email = " + email);
 		return;
@@ -61,7 +62,7 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 	public User updateUser(User user) {
 		// user = populateUserNullsWithdefaults(user);
 
-		String SQL = "update appUser set firstName = ?, lastName = ?, dob = ?, email = ?, pw = ?";
+		String SQL = "update app_user set firstName = ?, lastName = ?, dob = ?, email = ?, pw = ?";
 
 		if (user.getId() > 0) {
 			SQL += " where id = ?";

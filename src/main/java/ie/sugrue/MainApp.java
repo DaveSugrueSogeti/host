@@ -58,7 +58,7 @@ public class MainApp implements CommandLineRunner {
 	private void popUsers(MySQLUserRepositoryImpl mySQLUserRepositoryImpl) {
 		// Delete all after 1
 		System.out.println("------Records Reset--------");
-		List<User> users = mySQLUserRepositoryImpl.listUsers();
+		List<User> users = mySQLUserRepositoryImpl.getUsers();
 		int numberOfRows = users.size();
 		System.out.println("There are currently " + numberOfRows + " rows.");
 		for (int i = 0; i < users.size(); i++) {
@@ -98,7 +98,7 @@ public class MainApp implements CommandLineRunner {
 		mySQLUserRepositoryImpl.createUser(c9);
 
 		System.out.println("------Listing Multiple Records--------");
-		users = mySQLUserRepositoryImpl.listUsers();
+		users = mySQLUserRepositoryImpl.getUsers();
 		for (User record : users) {
 			System.out.print("ID : " + record.getId());
 			System.out.print(", First Name : " + record.getFirstName());
