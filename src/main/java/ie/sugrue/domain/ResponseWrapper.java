@@ -39,7 +39,7 @@ public class ResponseWrapper {
 		return objects;
 	}
 
-	public void setObject(ArrayList objects) {
+	public void setObjects(ArrayList objects) {
 		this.objects = objects;
 	}
 
