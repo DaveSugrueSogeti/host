@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
@@ -32,6 +33,9 @@ public class DeleteUserServiceImpl implements DeleteUserService {
 				log.error("Cannot identify user to be deleted when trying to delete {} from Database", user);
 				resp.getStatus().updateStatus(1, "We encountered a problem deleting user details from our database. Please try again.");
 			}
+		} catch (EmptyResultDataAccessException erdae) {
+			log.info("Problem occured deleting user with id of {} from DB - ", user.getId(), erdae);
+			resp.getStatus().updateStatus(1, "User cannot be deleted as it does not exist.");
 		} catch (DataAccessException dae) {
 			log.error("Data Access exception encountered trying to delete {} from Database", user, dae);
 			resp.getStatus().updateStatus(2, "We encountered a problem deleting user details from our database. Please try again.");

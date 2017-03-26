@@ -31,10 +31,10 @@ public class CreateCategoryServiceImpl implements CreateCategoryService {
 			resp.getStatus().updateStatus(1, "The category id '" + category.getId() + "' is already in use.");
 		} catch (DataAccessException dae) {
 			log.error("Data Access exception encountered trying to save {} to Database", category, dae);
-			resp.getStatus().updateStatus(2, "We encountered a problem saving your details to our database. Please try again.");
+			resp.getStatus().updateStatus(2, "We encountered a problem saving the Category details to our database. Please try again.");
 		} catch (Exception e) {
 			log.error("Unknown exception encountered trying to save {} to Database", category, e);
-			resp.getStatus().updateStatus(2, "We encountered a problem saving your details to our database. Please try again.");
+			resp.getStatus().updateStatus(2, "We encountered a problem saving the Category details to our database. Please try again.");
 		}
 
 		return resp;

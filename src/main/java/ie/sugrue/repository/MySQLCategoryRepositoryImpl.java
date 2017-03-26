@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +41,10 @@ public class MySQLCategoryRepositoryImpl implements CategoryRepository {
 
 	public void deleteCategory(String id) {
 		String SQL = "delete from category where id = ?";
-		jdbc.update(SQL, id);
+		int result = jdbc.update(SQL, id);
+		if (result == 0) {
+			throw new EmptyResultDataAccessException(1);
+		}
 		log.debug("Deleted Record with ID = " + id);
 		return;
 	}
