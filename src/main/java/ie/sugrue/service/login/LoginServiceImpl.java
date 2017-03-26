@@ -37,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
 			log.error("Unknown exception encountered trying to log {} in.", user, e);
 			resp.getStatus().updateStatus(2, "We encountered a problem logging you in. Please try again.");
 		}
-
+		log.info("resp = " + resp.toString());
 		return resp;
 	}
 
