@@ -10,7 +10,7 @@ public class Product {
 	private final Logger	log	= LoggerFactory.getLogger(this.getClass());
 
 	private long			id;
-	private String			category_id, name, description, icon_url, image_url;
+	private String			categoryId, name, description, iconUrl, imageUrl;
 	private BigDecimal		price;
 	private int				stock;
 
@@ -22,12 +22,12 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getCategory_id() {
-		return category_id;
+	public String getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory_id(String category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(String category_id) {
+		this.categoryId = category_id;
 	}
 
 	public String getName() {
@@ -46,20 +46,20 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getIcon_url() {
-		return icon_url;
+	public String getIconUrl() {
+		return iconUrl;
 	}
 
-	public void setIcon_url(String icon_url) {
-		this.icon_url = icon_url;
+	public void setIconUrl(String icon_url) {
+		this.iconUrl = icon_url;
 	}
 
-	public String getImage_url() {
-		return image_url;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+	public void setImageUrl(String image_url) {
+		this.imageUrl = image_url;
 	}
 
 	public BigDecimal getPrice() {
@@ -80,7 +80,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", category_id=" + category_id + ", name=" + name + ", description=" + description + ", icon_url=" + icon_url + ", image_url=" + image_url
+		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description=" + description + ", iconUrl=" + iconUrl + ", imageUrl=" + imageUrl
 				+ ", price=" + price + ", stock=" + stock + "]";
 	}
 
@@ -88,11 +88,11 @@ public class Product {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((category_id == null) ? 0 : category_id.hashCode());
+		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((icon_url == null) ? 0 : icon_url.hashCode());
+		result = prime * result + ((iconUrl == null) ? 0 : iconUrl.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((image_url == null) ? 0 : image_url.hashCode());
+		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + stock;
@@ -111,11 +111,11 @@ public class Product {
 			return false;
 		}
 		Product other = (Product) obj;
-		if (category_id == null) {
-			if (other.category_id != null) {
+		if (categoryId == null) {
+			if (other.categoryId != null) {
 				return false;
 			}
-		} else if (!category_id.equals(other.category_id)) {
+		} else if (!categoryId.equals(other.categoryId)) {
 			return false;
 		}
 		if (description == null) {
@@ -125,21 +125,21 @@ public class Product {
 		} else if (!description.equals(other.description)) {
 			return false;
 		}
-		if (icon_url == null) {
-			if (other.icon_url != null) {
+		if (iconUrl == null) {
+			if (other.iconUrl != null) {
 				return false;
 			}
-		} else if (!icon_url.equals(other.icon_url)) {
+		} else if (!iconUrl.equals(other.iconUrl)) {
 			return false;
 		}
 		if (id != other.id) {
 			return false;
 		}
-		if (image_url == null) {
-			if (other.image_url != null) {
+		if (imageUrl == null) {
+			if (other.imageUrl != null) {
 				return false;
 			}
-		} else if (!image_url.equals(other.image_url)) {
+		} else if (!imageUrl.equals(other.imageUrl)) {
 			return false;
 		}
 		if (name == null) {

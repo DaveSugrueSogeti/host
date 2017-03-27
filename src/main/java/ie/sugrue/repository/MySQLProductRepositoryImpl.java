@@ -21,8 +21,8 @@ public class MySQLProductRepositoryImpl implements ProductRepository {
 	public void createProduct(Product product) {
 		String SQL = "insert into product ( id, category_id, name, description, price, stock, icon_url, image_url ) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		jdbc.update(SQL, product.getId(), product.getCategory_id(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIcon_url(),
-				product.getImage_url());
+		jdbc.update(SQL, product.getId(), product.getCategoryId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIconUrl(),
+				product.getImageUrl());
 		log.debug("Created Record Name = " + product.getId() + " " + product.getName());
 		return;
 	}
@@ -61,8 +61,8 @@ public class MySQLProductRepositoryImpl implements ProductRepository {
 		// user = populateUserNullsWithdefaults(user);
 
 		String SQL = "update product set category_id = ?, name = ?, description = ?, price = ?, stock = ?, icon_url = ?, image_url = ? where id = ?";
-		jdbc.update(SQL, product.getCategory_id(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIcon_url(),
-				product.getImage_url(), product.getId());
+		jdbc.update(SQL, product.getCategoryId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIconUrl(),
+				product.getImageUrl(), product.getId());
 		product = getProduct(product.getId());
 		log.debug("Updated Record with ID = " + product.getId());
 		return product;
