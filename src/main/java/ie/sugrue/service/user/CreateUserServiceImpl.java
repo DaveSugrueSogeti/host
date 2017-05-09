@@ -20,6 +20,8 @@ public class CreateUserServiceImpl implements CreateUserService {
 
 	@Autowired
 	private UserRepository	userRepo;
+	@Autowired
+	GetUserService			getUserService;
 
 	@Override
 	public ResponseWrapper createUser(ResponseWrapper resp, User user) {
@@ -37,6 +39,9 @@ public class CreateUserServiceImpl implements CreateUserService {
 			resp.getStatus().updateStatus(2, "We encountered a problem saving your details to our database. Please try again.");
 		}
 
+		// Now that the user is created, re-populate the object with the id and add it to the responseWrapper
+		user = getUserService.getUser(user.getEmail());
+		resp.addObject(user);
 		return resp;
 	}
 
