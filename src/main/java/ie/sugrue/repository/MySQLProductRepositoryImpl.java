@@ -19,10 +19,10 @@ public class MySQLProductRepositoryImpl implements ProductRepository {
 	protected JdbcTemplate	jdbc;
 
 	public void createProduct(Product product) {
-		String SQL = "insert into product ( id, category_id, name, description, price, stock, icon_url, image_url ) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "insert into product ( id, category_id, format, name, description, price, stock, icon_url, image_url, rating ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		jdbc.update(SQL, product.getId(), product.getCategoryId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIconUrl(),
-				product.getImageUrl());
+		jdbc.update(SQL, product.getId(), product.getCategoryId(), product.getFormat(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(),
+				product.getIconUrl(), product.getImageUrl(), product.getRating());
 		log.debug("Created Record Name = " + product.getId() + " " + product.getName());
 		return;
 	}
@@ -60,9 +60,9 @@ public class MySQLProductRepositoryImpl implements ProductRepository {
 	public Product updateProduct(Product product) {
 		// user = populateUserNullsWithdefaults(user);
 
-		String SQL = "update product set category_id = ?, name = ?, description = ?, price = ?, stock = ?, icon_url = ?, image_url = ? where id = ?";
-		jdbc.update(SQL, product.getCategoryId(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIconUrl(),
-				product.getImageUrl(), product.getId());
+		String SQL = "update product set category_id = ?, format = ?, name = ?, description = ?, price = ?, stock = ?, icon_url = ?, image_url = ? , rating = ? where id = ?";
+		jdbc.update(SQL, product.getCategoryId(), product.getFormat(), product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getIconUrl(),
+				product.getImageUrl(), product.getRating(), product.getId());
 		product = getProduct(product.getId());
 		log.debug("Updated Record with ID = " + product.getId());
 		return product;

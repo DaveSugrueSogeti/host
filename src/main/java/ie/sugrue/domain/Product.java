@@ -10,9 +10,9 @@ public class Product {
 	private final Logger	log	= LoggerFactory.getLogger(this.getClass());
 
 	private long			id;
-	private String			categoryId, name, description, iconUrl, imageUrl;
+	private String			categoryId, format, name, description, iconUrl, imageUrl;
 	private BigDecimal		price;
-	private int				stock;
+	private Integer			stock, rating;
 
 	public long getId() {
 		return id;
@@ -28,6 +28,14 @@ public class Product {
 
 	public void setCategoryId(String category_id) {
 		this.categoryId = category_id;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public String getName() {
@@ -70,7 +78,7 @@ public class Product {
 		this.price = price;
 	}
 
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
 
@@ -78,10 +86,18 @@ public class Product {
 		this.stock = stock;
 	}
 
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", description=" + description + ", iconUrl=" + iconUrl + ", imageUrl=" + imageUrl
-				+ ", price=" + price + ", stock=" + stock + "]";
+		return "Product [id=" + id + ", categoryId=" + categoryId + ", format=" + format + ", name=" + name + ", description=" + description + ", iconUrl=" + iconUrl
+				+ ", imageUrl=" + imageUrl + ", price=" + price + ", stock=" + stock + ", rating=" + rating + "]";
 	}
 
 	@Override
@@ -90,11 +106,13 @@ public class Product {
 		int result = 1;
 		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((format == null) ? 0 : format.hashCode());
 		result = prime * result + ((iconUrl == null) ? 0 : iconUrl.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + rating;
 		result = prime * result + stock;
 		return result;
 	}
@@ -123,6 +141,13 @@ public class Product {
 				return false;
 			}
 		} else if (!description.equals(other.description)) {
+			return false;
+		}
+		if (format == null) {
+			if (other.format != null) {
+				return false;
+			}
+		} else if (!format.equals(other.format)) {
 			return false;
 		}
 		if (iconUrl == null) {
@@ -154,6 +179,9 @@ public class Product {
 				return false;
 			}
 		} else if (!price.equals(other.price)) {
+			return false;
+		}
+		if (rating != other.rating) {
 			return false;
 		}
 		if (stock != other.stock) {
