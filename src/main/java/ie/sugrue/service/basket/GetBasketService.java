@@ -11,4 +11,6 @@ public interface GetBasketService {
 
 	public ResponseWrapper getBasketForUser(ResponseWrapper resp, long userId);
 
+	public Boolean basketAlreadyExistsForUser(long userId);
+
 }

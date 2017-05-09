@@ -75,4 +75,14 @@ public class GetBasketServiceImpl implements GetBasketService {
 		return resp;
 	}
 
+	@Override
+	public Boolean basketAlreadyExistsForUser(long userId) {
+		try {
+			Basket basket = basketRepo.getBasketForUser(userId);
+			return true;
+		} catch (EmptyResultDataAccessException erdae) {
+			return false;
+		}
+	}
+
 }
