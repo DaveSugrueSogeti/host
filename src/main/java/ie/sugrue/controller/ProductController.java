@@ -18,7 +18,7 @@ import ie.sugrue.service.product.DeleteProductService;
 import ie.sugrue.service.product.GetProductService;
 import ie.sugrue.service.product.UpdateProductService;
 
-@CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
 @RequestMapping("/product")
