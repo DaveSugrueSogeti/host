@@ -18,7 +18,7 @@ import ie.sugrue.service.user.DeleteUserService;
 import ie.sugrue.service.user.GetUserService;
 import ie.sugrue.service.user.UpdateUserService;
 
-@CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
 @RequestMapping("/user")

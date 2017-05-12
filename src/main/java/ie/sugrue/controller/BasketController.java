@@ -19,7 +19,7 @@ import ie.sugrue.service.basket.DeleteBasketService;
 import ie.sugrue.service.basket.GetBasketService;
 import ie.sugrue.service.basket.UpdateBasketService;
 
-@CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
 @RequestMapping("/basket")

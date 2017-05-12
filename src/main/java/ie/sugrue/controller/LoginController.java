@@ -12,8 +12,7 @@ import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 import ie.sugrue.service.login.LoginService;
 
-//@CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
 @RequestMapping("/")

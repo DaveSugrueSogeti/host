@@ -18,7 +18,7 @@ import ie.sugrue.service.category.DeleteCategoryService;
 import ie.sugrue.service.category.GetCategoryService;
 import ie.sugrue.service.category.UpdateCategoryService;
 
-@CrossOrigin(origins = "http://desktop:5000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
 @RequestMapping("/category")
