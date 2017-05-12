@@ -48,10 +48,13 @@ public class ProductController extends PrimaryController {
 	public ResponseWrapper getProduct(@RequestParam(value = "category_id", defaultValue = "") String category_id) {
 		// If no Category id specified, bring them all back (default)
 		if (category_id.equals("")) {
-			return getProductService.getProducts(resp);
+			resp = getProductService.getProducts(resp);
 		} else {
-			return getProductService.getProducts(resp, category_id);
+			resp = getProductService.getProducts(resp, category_id);
 		}
+		log.info("Called:: /product/all");
+		log.info("Returning:: " + resp);
+		return resp;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.PUT)
