@@ -52,7 +52,7 @@ public class MovieController extends PrimaryController {
 		} else {
 			resp = getMovieService.getMovies(resp, genreId);
 		}
-		log.info("Called:: /movie/all");
+		log.info("Called:: /movie/all with genreId=" + genreId);
 		log.info("Returning:: " + resp);
 		return resp;
 	}
