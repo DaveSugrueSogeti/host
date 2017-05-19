@@ -41,6 +41,8 @@ public class MovieController extends PrimaryController {
 	@RequestMapping("")
 	public ResponseWrapper getMovie(@RequestParam(value = "id", defaultValue = "") int id) {
 		ResponseWrapper resp2 = getMovieService.getMovie(resp, id);
+		log.info("Called:: /movie with id=" + id);
+		log.info("Returning:: " + resp2);
 		return resp2;
 	}
 
@@ -57,14 +59,14 @@ public class MovieController extends PrimaryController {
 		return resp;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.PUT)
+	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseWrapper createMovie(@RequestBody Movie movie) {
 		log.info("CREATING -> {}", movie);
 
 		return createMovieService.createMovie(resp, movie);
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseWrapper updateMovie(@RequestBody Movie movie) {
 		log.info("UPDATING -> {}", movie);
 
