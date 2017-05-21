@@ -13,6 +13,22 @@ public class Movie {
 	private String			image;
 	private Integer			rating;
 
+	public Movie(int id, String genreId, String name, String format, String notes, Integer duration, String image, Integer rating) {
+		super();
+		this.id = id;
+		this.genreId = genreId;
+		this.name = name;
+		this.format = format;
+		this.notes = notes;
+		this.duration = duration;
+		this.image = image;
+		this.rating = rating;
+	}
+
+	public Movie() {
+
+	}
+
 	public int getId() {
 		return id;
 	}

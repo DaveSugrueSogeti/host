@@ -69,8 +69,17 @@ public class StatusTest {
 		status.updateStatus(0, "Test this");
 		status.updateStatus(0, "Test that");
 		assertEquals(3, status.getMessages().size());
-		log.info(status.toString());
 		assertEquals("Status [code=0, messages=[Success, Test this, Test that]]", status.toString());
+	}
+
+	@Test
+	public void testEquals() {
+		status.updateStatus(0, "Test this");
+
+		Status otherStatusObj = new Status();
+		otherStatusObj.updateStatus(0, "Test this");
+
+		assertEquals(status, otherStatusObj);
 	}
 
 }

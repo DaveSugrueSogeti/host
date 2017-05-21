@@ -10,6 +10,17 @@ public class Genre {
 	private String			id, description;
 	private int				orderSequence;
 
+	public Genre(String id, String description, int orderSequence) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.orderSequence = orderSequence;
+	}
+
+	public Genre() {
+
+	}
+
 	public String getId() {
 		return id;
 	}

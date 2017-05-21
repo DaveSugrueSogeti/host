@@ -71,4 +71,39 @@ public class Status {
 	public String toString() {
 		return "Status [code=" + code + ", messages=" + messages + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + code;
+		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Status other = (Status) obj;
+		if (code != other.code) {
+			return false;
+		}
+		if (messages == null) {
+			if (other.messages != null) {
+				return false;
+			}
+		} else if (!messages.equals(other.messages)) {
+			return false;
+		}
+		return true;
+	}
+
 }

@@ -35,7 +35,7 @@ public class ResponseWrapper {
 		this.status = status;
 	}
 
-	public List getObject() {
+	public List getObjects() {
 		return objects;
 	}
 
@@ -51,7 +51,7 @@ public class ResponseWrapper {
 		if (this.getStatus().getCode() == 2) {
 			log.error("");
 			log.error("##################################################     ERROR     ##################################################");
-			log.info("Error encountered :: {}", this);
+			log.error("Error encountered :: {}", this);
 			log.error("########################################     End     ########################################");
 			log.error("");
 		} else {
@@ -61,8 +61,51 @@ public class ResponseWrapper {
 		return this;
 	}
 
+	public void updateStatus(int newCode, String message) {
+		this.getStatus().updateStatus(newCode, message);
+	}
+
 	@Override
 	public String toString() {
 		return "ResponseWrapper [status=" + status + ", objects=" + objects + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((objects == null) ? 0 : objects.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ResponseWrapper other = (ResponseWrapper) obj;
+		if (objects == null) {
+			if (other.objects != null) {
+				return false;
+			}
+		} else if (!objects.equals(other.objects)) {
+			return false;
+		}
+		if (status == null) {
+			if (other.status != null) {
+				return false;
+			}
+		} else if (!status.equals(other.status)) {
+			return false;
+		}
+		return true;
+	}
+
 }

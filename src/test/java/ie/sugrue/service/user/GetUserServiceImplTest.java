@@ -71,7 +71,7 @@ public class GetUserServiceImplTest {
 
 		resp = getUserServiceImpl.getUser(resp, "mike99@cleary.net");
 		assertEquals(0, resp.getStatus().getCode());
-		retrievedUser = (User) resp.getObject().get(0);
+		retrievedUser = (User) resp.getObjects().get(0);
 		assertEquals(user, retrievedUser);
 
 		resp = getUserServiceImpl.getUser(resp, "nobody@here.ie");
@@ -95,7 +95,7 @@ public class GetUserServiceImplTest {
 
 		resp = getUserServiceImpl.getUser(resp, 1l);
 		assertEquals(0, resp.getStatus().getCode());
-		retrievedUser = (User) resp.getObject().get(0);
+		retrievedUser = (User) resp.getObjects().get(0);
 		assertEquals(user, retrievedUser);
 
 		resp = getUserServiceImpl.getUser(resp, 2l);

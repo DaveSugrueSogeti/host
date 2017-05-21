@@ -9,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.Movie;
-import ie.sugrue.domain.Product;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.repository.MovieRepository;
 import ie.sugrue.utils.Utils;
@@ -30,10 +29,6 @@ public class UpdateMovieServiceImpl implements UpdateMovieService {
 	public ResponseWrapper updateMovie(ResponseWrapper resp, Movie movie) {
 
 		try {
-			Product p = new Product();
-			Integer i = new Integer(5);
-			i = p.getStock();
-
 			movie = populateMovieNullsWithdefaults(movie);
 
 			resp.addObject(movieRepo.updateMovie(movie));

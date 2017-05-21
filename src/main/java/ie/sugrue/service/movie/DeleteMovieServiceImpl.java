@@ -29,7 +29,7 @@ public class DeleteMovieServiceImpl implements DeleteMovieService {
 				movieRepo.deleteMovie(movie.getId());
 			} else {
 				log.error("Cannot identify Movie to be deleted when trying to delete {} from Database", movie);
-				resp.getStatus().updateStatus(1, "We encountered a problem deleting Movie details from our database. Please try again.");
+				resp.getStatus().updateStatus(1, "I'm not sure what Movie you are trying to delete. Please try again.");
 			}
 		} catch (EmptyResultDataAccessException erdae) {
 			log.info("Problem occured deleting movie with id of {} from DB - ", movie.getId(), erdae);
