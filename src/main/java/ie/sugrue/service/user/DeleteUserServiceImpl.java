@@ -31,7 +31,7 @@ public class DeleteUserServiceImpl implements DeleteUserService {
 				userRepo.deleteUser(user.getEmail());
 			} else {
 				log.error("Cannot identify user to be deleted when trying to delete {} from Database", user);
-				resp.getStatus().updateStatus(1, "We encountered a problem deleting user details from our database. Please try again.");
+				resp.getStatus().updateStatus(1, "I'm not sure what User you are trying to delete. Please try again.");
 			}
 		} catch (EmptyResultDataAccessException erdae) {
 			log.info("Problem occured deleting user with id of {} from DB - ", user.getId(), erdae);

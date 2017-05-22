@@ -29,7 +29,7 @@ public class DeleteGenreServiceImpl implements DeleteGenreService {
 				genreRepo.deleteGenre(genre.getId());
 			} else {
 				log.error("Cannot identify Genre to be deleted when trying to delete {} from Database", genre);
-				resp.getStatus().updateStatus(1, "We encountered a problem deleting Genre details from our database. Please try again.");
+				resp.getStatus().updateStatus(1, "I'm not sure what Genre you are trying to delete. Please try again.");
 			}
 		} catch (EmptyResultDataAccessException erdae) {
 			log.info("Problem occured deleting genre with id of {} from DB - ", genre.getId(), erdae);
