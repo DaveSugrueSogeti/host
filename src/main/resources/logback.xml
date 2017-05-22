@@ -27,7 +27,7 @@
 	</appender>
 	-->
 	<appender name="FILE_DEBUG" class="ch.qos.logback.core.FileAppender">
-		<file>C:\Logs\Demo\Debug.log</file>
+		<file>/share/CACHEDEV1_DATA/.qpkg/Tomcat8/tomcat8/logs/host/debug.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>DEBUG</level>
 		</filter>
@@ -37,7 +37,7 @@
 	</appender>
 	
 	<appender name="FILE_ERROR" class="ch.qos.logback.core.FileAppender">
-		<file>C:\Logs\Demo\Error.log</file>
+		<file>/share/CACHEDEV1_DATA/.qpkg/Tomcat8/tomcat8/logs/host/error.log</file>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
 			<onMatch>ACCEPT</onMatch>

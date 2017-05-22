@@ -17,7 +17,7 @@ public class GreetingController extends PrimaryController {
 	private static final String	template	= "Hello, %s! How the fuck you doing?";
 	private final AtomicLong	counter		= new AtomicLong();
 
-	@RequestMapping("/greeting")
+	@RequestMapping("host/greeting")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
