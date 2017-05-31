@@ -6,6 +6,8 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +18,13 @@ import ie.sugrue.repository.MySQLUserRepositoryImpl;
 @EnableAutoConfiguration
 @Configuration
 @ComponentScan
-public class MainApp implements CommandLineRunner {
+public class MainApp extends SpringBootServletInitializer implements CommandLineRunner {
+
+	// Only needed for deploying war
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(MainApp.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(MainApp.class);
