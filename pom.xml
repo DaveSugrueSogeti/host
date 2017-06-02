@@ -74,7 +74,7 @@
 				<configuration>
 					<path>/host</path>
 					<update>true</update>
-					<url>http://192.168.0.9:8080/manager/text</url>
+					<url>http://192.168.0.10:9080/manager/text</url>
 					<username>deployer</username>
 					<password>deployer</password>
 				</configuration>
