@@ -39,12 +39,5 @@
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.0.10:3306/fitnessTracker?autoReconnect=true" />
-		<property name="username" value="DaveSugrue" />
-		<property name="password" value="letMeIn" />
-	</bean>
 
 </beans>
