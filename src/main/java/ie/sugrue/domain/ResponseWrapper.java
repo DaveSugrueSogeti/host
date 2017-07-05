@@ -26,27 +26,11 @@ public class ResponseWrapper {
 	public ResponseWrapper() {
 
 	}
-
-	public Status getStatus() {
-		return status;
+	
+	public void updateStatus(int newCode, String message) {
+		this.getStatus().updateStatus(newCode, message);
 	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public List getObjects() {
-		return objects;
-	}
-
-	public void setObjects(ArrayList objects) {
-		this.objects = objects;
-	}
-
-	public void addObject(Object object) {
-		this.objects.add(object);
-	}
-
+	
 	public ResponseWrapper complete() {
 		if (this.getStatus().getCode() == 2) {
 			log.error("");
@@ -60,11 +44,27 @@ public class ResponseWrapper {
 
 		return this;
 	}
-
-	public void updateStatus(int newCode, String message) {
-		this.getStatus().updateStatus(newCode, message);
+	
+	public Status getStatus() {
+		return status;
 	}
 
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public List getObjects() {
+		return objects;
+	}
+
+	public void setObjects(List objects) {
+		this.objects = objects;
+	}
+
+	public void addObject(Object object) {
+		this.objects.add(object);
+	}
+	
 	@Override
 	public String toString() {
 		return "ResponseWrapper [status=" + status + ", objects=" + objects + "]";
