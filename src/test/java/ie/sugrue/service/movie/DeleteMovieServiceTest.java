@@ -53,17 +53,10 @@ public class DeleteMovieServiceTest {
 	private MovieRepository		movieRepo;
 
 	private ResponseWrapper		resp;
-	private Movie				movie1;
-	private Movie				movie2;
-	private Movie				movie3;
 
 	@Before
 	public void setup() {
 		resp = new ResponseWrapper();
-
-		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75);
-		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80);
-		movie3 = new Movie();
 
 		doNothing().when(movieRepo).deleteMovie(1);
 		doThrow(new EmptyResultDataAccessException(0)).when(movieRepo).deleteMovie(2);
@@ -76,20 +69,20 @@ public class DeleteMovieServiceTest {
 
 	@Test
 	public void testDeleteMovieSuccess() {
-		resp = deleteMovieService.deleteMovie(resp, movie1);
+		resp = deleteMovieService.deleteMovie(resp, 1);
 		assertThat(resp.getStatus().getCode(), is(equalTo(0)));
 	}
 
 	@Test
 	public void testDeleteMovieWithNoIdFailure() {
-		resp = deleteMovieService.deleteMovie(resp, movie3);
+		resp = deleteMovieService.deleteMovie(resp, 0);
 		assertThat(resp.getStatus().getCode(), is(equalTo(1)));
 		assertThat(resp.getStatus().getMessages().get(0), is(equalTo("I'm not sure what Movie you are trying to delete. Please try again.")));
 	}
 
 	@Test
 	public void testDeleteNonExistantMovieFailure() {
-		resp = deleteMovieService.deleteMovie(resp, movie2);
+		resp = deleteMovieService.deleteMovie(resp, 2);
 		assertThat(resp.getStatus().getCode(), is(equalTo(1)));
 		assertThat(resp.getStatus().getMessages().get(0), is(equalTo("Movie cannot be deleted as it does not exist.")));
 	}

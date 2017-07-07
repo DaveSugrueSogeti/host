@@ -5,6 +5,6 @@ import ie.sugrue.domain.User;
 
 public interface DeleteUserService {
 
-	ResponseWrapper deleteUser(ResponseWrapper resp, User user);
+	ResponseWrapper deleteUser(ResponseWrapper resp, String id);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.domain.User;
 import ie.sugrue.repository.UserRepository;
+import ie.sugrue.utils.Utils;
 
 @Service("deleteUserService")
 @Scope("prototype")
@@ -22,25 +23,38 @@ public class DeleteUserServiceImpl implements DeleteUserService {
 	private UserRepository	userRepo;
 
 	@Override
-	public ResponseWrapper deleteUser(ResponseWrapper resp, User user) {
+	public ResponseWrapper deleteUser(ResponseWrapper resp, String id) {
 
+		Long userId = 0l;
+		
 		try {
-			if (user.getId() > 0) {
-				userRepo.deleteUser(user.getId());
-			} else if (null != user.getEmail()) {
-				userRepo.deleteUser(user.getEmail());
+			if (Utils.isNotNull(id))
+			{
+				if (id.contains("@")){
+					String email = id;
+					userRepo.deleteUser(email);
+				}
+				else {
+					try{
+						userId = Long.valueOf(id);
+					} catch (NumberFormatException nfe){
+						log.error("Cannot identify user based on id of {} to be deleted when trying to delete from Database", id, nfe);
+						resp.getStatus().updateStatus(1, "I'm not sure what User you are trying to delete. Please try again.");
+					}
+					userRepo.deleteUser(userId);
+				}
 			} else {
-				log.error("Cannot identify user to be deleted when trying to delete {} from Database", user);
+				log.error("Cannot identify user based on id of {} to be deleted when trying to delete from Database", id);
 				resp.getStatus().updateStatus(1, "I'm not sure what User you are trying to delete. Please try again.");
 			}
 		} catch (EmptyResultDataAccessException erdae) {
-			log.info("Problem occured deleting user with id of {} from DB - ", user.getId(), erdae);
+			log.info("Problem occured deleting user with id of {} from DB - ", id, erdae);
 			resp.getStatus().updateStatus(1, "User cannot be deleted as it does not exist.");
 		} catch (DataAccessException dae) {
-			log.error("Data Access exception encountered trying to delete {} from Database", user, dae);
+			log.error("Data Access exception encountered trying to delete user with id of {} from Database", id, dae);
 			resp.getStatus().updateStatus(2, "We encountered a problem deleting user details from our database. Please try again.");
 		} catch (Exception e) {
-			log.error("Unknown exception encountered trying to delete {} to Database", user, e);
+			log.error("Unknown exception encountered trying to delete user with id of {} to Database", id, e);
 			resp.getStatus().updateStatus(2, "We encountered a problem deleting user details from our database. Please try again.");
 		}
 

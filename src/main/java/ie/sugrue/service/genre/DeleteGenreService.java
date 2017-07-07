@@ -5,6 +5,6 @@ import ie.sugrue.domain.ResponseWrapper;
 
 public interface DeleteGenreService {
 
-	ResponseWrapper deleteGenre(ResponseWrapper resp, Genre genre);
+	ResponseWrapper deleteGenre(ResponseWrapper resp, String id);
 
 }

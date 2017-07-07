@@ -58,12 +58,12 @@ public class MainApp extends SpringBootServletInitializer implements CommandLine
 
 		System.out.println("------Starting Up--------");
 		
-		MoviesGateway moviesGateway = new MoviesGateway();
-		
-		List<Movie> movies = moviesGateway.populateMovies();
-		
-		if ( !movies.isEmpty() ){
-			moviesGateway.displayMovies(movies);
-		}
+//		MoviesGateway moviesGateway = new MoviesGateway();
+//		
+//		List<Movie> movies = moviesGateway.populateMovies();
+//		
+//		if ( !movies.isEmpty() ){
+//			moviesGateway.displayMovies(movies);
+//		}
 	}
 }

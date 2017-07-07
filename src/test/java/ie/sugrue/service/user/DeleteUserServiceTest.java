@@ -53,21 +53,15 @@ public class DeleteUserServiceTest {
 	private UserRepository		userRepo;
 
 	private ResponseWrapper		resp;
-	private User				user1;
-	private User				user2;
-	private Date				dob;
 
 	@Before
 	public void setup() {
 		resp = new ResponseWrapper();
 
-		dob = Date.valueOf("1985-05-01");
-		user1 = new User(1, "John", "Doe", dob, "john@doe.ie", "123456");
-		dob = Date.valueOf("1985-05-02");
-		user2 = new User(2, "Jane", "Doe", dob, "jane@doe.ie", "123456");
-
 		doNothing().when(userRepo).deleteUser(1);
 		doThrow(new EmptyResultDataAccessException(0)).when(userRepo).deleteUser(2);
+		doNothing().when(userRepo).deleteUser("john@doe.ie");
+		doThrow(new EmptyResultDataAccessException(0)).when(userRepo).deleteUser("jane@doe.ie");
 	}
 
 	@After
@@ -77,36 +71,40 @@ public class DeleteUserServiceTest {
 
 	@Test
 	public void testDeleteUserByIdSuccess() {
-		resp = deleteUserService.deleteUser(resp, user1);
+		resp = deleteUserService.deleteUser(resp, "1");
 		assertEquals(0, resp.getStatus().getCode());
 	}
 
 	@Test
 	public void testDeleteNonExistantUserById() {
-		resp = deleteUserService.deleteUser(resp, user2);
+		resp = deleteUserService.deleteUser(resp, "2");
 		assertEquals(1, resp.getStatus().getCode());
 	}
 
 	@Test
-	public void testDeleteUnkownUserById() {
-		User user3 = new User();
-		resp = deleteUserService.deleteUser(resp, user3);
+	public void testDeleteUnknownUserById() {
+		resp = deleteUserService.deleteUser(resp, null);
 		assertEquals(1, resp.getStatus().getCode());
 		assertEquals("I'm not sure what User you are trying to delete. Please try again.", resp.getStatus().getMessages().get(0));
 	}
 
 	@Test
 	public void testDeleteUserByEmailSuccess() {
-		user1.setId(0);
-		resp = deleteUserService.deleteUser(resp, user1);
+		resp = deleteUserService.deleteUser(resp, "john@doe.ie");
 		assertEquals(0, resp.getStatus().getCode());
 	}
 
 	@Test
 	public void testDeleteNonExistantUserByEmail() {
-		user1.setId(0);
-		resp = deleteUserService.deleteUser(resp, user2);
+		resp = deleteUserService.deleteUser(resp, "jane@doe.ie");
 		assertEquals(1, resp.getStatus().getCode());
+	}
+	
+	@Test
+	public void testDeleteUnknownUserByEmail() {
+		resp = deleteUserService.deleteUser(resp, "jackdoe.ie");
+		assertEquals(1, resp.getStatus().getCode());
+		assertEquals("I'm not sure what User you are trying to delete. Please try again.", resp.getStatus().getMessages().get(0));
 	}
 
 }

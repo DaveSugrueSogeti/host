@@ -58,7 +58,10 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 
 	public void deleteUser(String email) {
 		String SQL = "delete from app_user where email = ?";
-		jdbc.update(SQL, email);
+		int result = jdbc.update(SQL, email);
+		if (result == 0) {
+			throw new EmptyResultDataAccessException(1);
+		}
 		log.debug("Deleted Record with email = " + email);
 		return;
 	}

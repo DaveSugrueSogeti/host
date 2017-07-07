@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,7 @@ import ie.sugrue.service.user.UpdateUserService;
 @CrossOrigin(origins = "*", maxAge = 3600)
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Scope("request")
 public class UserController extends PrimaryController {
 
@@ -38,8 +39,8 @@ public class UserController extends PrimaryController {
 	@Autowired
 	DeleteUserService		deleteUserService;
 
-	@RequestMapping("")
-	public ResponseWrapper user(@RequestParam(value = "id", defaultValue = "1") long id) {
+	@RequestMapping("/{id}")
+	public ResponseWrapper user(@PathVariable int id) {
 		return getUserService.getUser(resp, id);
 	}
 
@@ -48,23 +49,23 @@ public class UserController extends PrimaryController {
 	 * System.out.println("Posting..."); model.addAttribute("user", user); MySQLUserRepositoryImpl.createUser(user); return; }
 	 */
 
-	@RequestMapping(value = "/create", method = RequestMethod.PUT)
+	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public ResponseWrapper create(@RequestBody User user) {
 		log.info("CREATING -> {}", user);
 
 		return createUserService.createUser(resp, user);
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseWrapper updateUser(@RequestBody User user) {
 		log.info("UPDATING -> {}", user);
 
 		return updateUserService.updateUser(resp, user);
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseWrapper deleteUser(@RequestBody User user) {
-		log.info("DELETING -> {}", user);
-		return deleteUserService.deleteUser(resp, user);
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseWrapper deleteUser(@PathVariable String id) {
+		log.info("DELETING User with id -> {}", id);
+		return deleteUserService.deleteUser(resp, id);
 	}
 }
