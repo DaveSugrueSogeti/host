@@ -8,9 +8,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import ie.sugrue.domain.Genre;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.repository.GenreRepository;
+import ie.sugrue.utils.Utils;
 
 @Service("deleteGenreService")
 @Scope("prototype")
@@ -22,23 +22,23 @@ public class DeleteGenreServiceImpl implements DeleteGenreService {
 	private GenreRepository	genreRepo;
 
 	@Override
-	public ResponseWrapper deleteGenre(ResponseWrapper resp, Genre genre) {
+	public ResponseWrapper deleteGenre(ResponseWrapper resp, String id) {
 
 		try {
-			if (null != genre.getId()) {
-				genreRepo.deleteGenre(genre.getId());
+			if (Utils.isNotNull(id)) {
+				genreRepo.deleteGenre(id);
 			} else {
-				log.error("Cannot identify Genre to be deleted when trying to delete {} from Database", genre);
+				log.error("Cannot identify Genre to be deleted when trying to delete genre with id {} from Database", id);
 				resp.getStatus().updateStatus(1, "I'm not sure what Genre you are trying to delete. Please try again.");
 			}
 		} catch (EmptyResultDataAccessException erdae) {
-			log.info("Problem occured deleting genre with id of {} from DB - ", genre.getId(), erdae);
+			log.info("Problem occured deleting genre with id of {} from DB - ", id, erdae);
 			resp.getStatus().updateStatus(1, "Genre cannot be deleted as it does not exist.");
 		} catch (DataAccessException dae) {
-			log.error("Data Access exception encountered trying to delete {} from Database", genre, dae);
+			log.error("Data Access exception encountered trying to delete genre with id {} from Database", id, dae);
 			resp.getStatus().updateStatus(2, "We encountered a problem deleting Genre details from our database. Please try again.");
 		} catch (Exception e) {
-			log.error("Unknown exception encountered trying to delete {} to Database", genre, e);
+			log.error("Unknown exception encountered trying to delete genre with id {} to Database", id, e);
 			resp.getStatus().updateStatus(2, "We encountered a problem deleting Genre details from our database. Please try again.");
 		}
 

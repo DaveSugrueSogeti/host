@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ie.sugrue.domain.User;
-import ie.sugrue.utils.Utils;
 
 @Repository
 public class MySQLUserRepositoryImpl implements UserRepository {
@@ -58,7 +57,10 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 
 	public void deleteUser(String email) {
 		String SQL = "delete from app_user where email = ?";
-		jdbc.update(SQL, email);
+		int result = jdbc.update(SQL, email);
+		if (result == 0) {
+			throw new EmptyResultDataAccessException(1);
+		}
 		log.debug("Deleted Record with email = " + email);
 		return;
 	}
@@ -78,29 +80,6 @@ public class MySQLUserRepositoryImpl implements UserRepository {
 			user = getUser(user.getEmail());
 		}
 		log.debug("Updated Record with ID = " + user.getId());
-		return user;
-	}
-
-	private User populateUserNullsWithdefaults(User user) {
-
-		User previousUserDetails = getUser(user.getId());
-
-		if (Utils.isNull(user.getDOB())) {
-			user.setDOB(previousUserDetails.getDOB());
-		}
-		if (Utils.isNull(user.getEmail())) {
-			user.setEmail(previousUserDetails.getEmail());
-		}
-		if (Utils.isNull(user.getFirstName())) {
-			user.setFirstName(previousUserDetails.getFirstName());
-		}
-		if (Utils.isNull(user.getLastName())) {
-			user.setLastName(previousUserDetails.getLastName());
-		}
-		if (Utils.isNull(user.getPw())) {
-			user.setPw(previousUserDetails.getPw());
-		}
-
 		return user;
 	}
 

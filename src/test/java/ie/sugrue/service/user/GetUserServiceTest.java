@@ -54,6 +54,7 @@ public class GetUserServiceTest {
 	private ResponseWrapper	resp;
 	private User			user1;
 	private User			user2;
+	private User			emptyUser;
 	private Date			dob;
 
 	@Before
@@ -64,6 +65,7 @@ public class GetUserServiceTest {
 		user1 = new User(1, "John", "Doe", dob, "john@doe.ie", "123456");
 		dob = Date.valueOf("1985-05-02");
 		user2 = new User(2, "Jane", "Doe", dob, "jane@doe.ie", "123456");
+		emptyUser = new User();
 
 		Mockito.when(userRepo.getUser(1)).thenReturn(user1);
 		doThrow(new EmptyResultDataAccessException(0)).when(userRepo).getUser(2);
@@ -75,33 +77,96 @@ public class GetUserServiceTest {
 	public void tearDown() {
 		Mockito.reset(userRepo);
 	}
-
+	
 	@Test
-	public void testGetUserByIdSuccess() {
-		resp = getUserService.getUser(resp, 1);
+	public void testGetUserByIdResponseSuccess() {
+		resp = getUserService.getUserById(resp, 1);
 		assertEquals(0, resp.getStatus().getCode());
 		assertEquals(user1, (User) resp.getObjects().get(0));
 	}
 
 	@Test
-	public void testGetNonExistantUserById() {
-		resp = getUserService.getUser(resp, 2);
+	public void testGetNonExistantUserByIdResponse() {
+		resp = getUserService.getUserById(resp, 2);
 		assertEquals(1, resp.getStatus().getCode());
+	}
+
+	@Test
+	public void testGetUserByEmailResponseSuccess() {
+		user1.setId(0);
+		resp = getUserService.getUserByEmail(resp, "john@doe.ie");
+		assertEquals(0, resp.getStatus().getCode());
+		assertEquals(user1, (User) resp.getObjects().get(0));
+	}
+
+	@Test
+	public void testGetNonExistantUserByEmailResponse() {
+		user1.setId(0);
+		resp = getUserService.getUserByEmail(resp, "jane@doe.ie");
+		assertEquals(1, resp.getStatus().getCode());
+	}
+
+	@Test
+	public void testGetUserByAnyIdEmailResponseSuccess(){
+		resp = getUserService.getUser(resp, "john@doe.ie");
+		assertEquals(0, resp.getStatus().getCode());
+		assertEquals(user1, (User) resp.getObjects().get(0));
+	}
+	
+	@Test
+	public void testGetUserByAnyIdLongResponseSuccess(){
+		resp = getUserService.getUser(resp, "1");
+		assertEquals(0, resp.getStatus().getCode());
+		assertEquals(user1, (User) resp.getObjects().get(0));
+	}
+	
+	@Test
+	public void testGetUserByAnyIdResponseFail(){
+		resp = getUserService.getUser(resp, "johndoe.ie");
+		assertEquals(1, resp.getStatus().getCode());
+	}
+	
+	@Test
+	public void testGetUserByIdSuccess() {
+		User returnedUser = getUserService.getUserById(1);
+		assertEquals(user1, returnedUser);
+	}
+
+	@Test
+	public void testGetNonExistantUserById() {
+		User returnedUser = getUserService.getUserById(2);
+		assertEquals(emptyUser, returnedUser);
 	}
 
 	@Test
 	public void testGetUserByEmailSuccess() {
 		user1.setId(0);
-		resp = getUserService.getUser(resp, "john@doe.ie");
-		assertEquals(0, resp.getStatus().getCode());
-		assertEquals(user1, (User) resp.getObjects().get(0));
+		User returnedUser = getUserService.getUserByEmail("john@doe.ie");
+		assertEquals(user1, returnedUser);
 	}
 
 	@Test
 	public void testGetNonExistantUserByEmail() {
 		user1.setId(0);
-		resp = getUserService.getUser(resp, "jane@doe.ie");
-		assertEquals(1, resp.getStatus().getCode());
+		User returnedUser = getUserService.getUserByEmail("jane@doe.ie");
+		assertEquals(emptyUser, returnedUser);
 	}
 
+	@Test
+	public void testGetUserByAnyIdEmailSuccess(){
+		User returnedUser = getUserService.getUser("john@doe.ie");
+		assertEquals(user1, returnedUser);
+	}
+	
+	@Test
+	public void testGetUserByAnyIdLongSuccess(){
+		User returnedUser = getUserService.getUser("1");
+		assertEquals(user1, returnedUser);
+	}
+	
+	@Test
+	public void testGetUserByAnyIdFail(){
+		User returnedUser = getUserService.getUser("johndoe.ie");
+		assertEquals(emptyUser, returnedUser);
+	}
 }

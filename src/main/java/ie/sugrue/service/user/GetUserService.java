@@ -5,11 +5,16 @@ import ie.sugrue.domain.User;
 
 public interface GetUserService {
 
-	public User getUser(long id);
+	public User getUser(String id);
 
-	public ResponseWrapper getUser(ResponseWrapper resp, long id);
+	public ResponseWrapper getUser(ResponseWrapper resp, String id);
+	
+	public User getUserById(long id);
 
-	public User getUser(String email);
+	public ResponseWrapper getUserById(ResponseWrapper resp, long id);
 
-	public ResponseWrapper getUser(ResponseWrapper resp, String email);
+	public User getUserByEmail(String email);
+
+	public ResponseWrapper getUserByEmail(ResponseWrapper resp, String email);
+	
 }

@@ -20,7 +20,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ie.sugrue.domain.Genre;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.repository.GenreRepository;
 
@@ -53,20 +52,13 @@ public class DeleteGenreServiceTest {
 	private GenreRepository		genreRepo;
 
 	private ResponseWrapper		resp;
-	private Genre				genre1;
-	private Genre				genre2;
-	private Genre				genre3;
 
 	@Before
 	public void setup() {
 		resp = new ResponseWrapper();
 
-		genre1 = new Genre("ACTN", "Test Name 1", 0);
-		genre2 = new Genre("COMDY", "Test Name 2", 1);
-		genre3 = new Genre();
-
 		doNothing().when(genreRepo).deleteGenre("ACTN");
-		doThrow(new EmptyResultDataAccessException(0)).when(genreRepo).deleteGenre("COMDY");
+		doThrow(new EmptyResultDataAccessException(0)).when(genreRepo).deleteGenre("CHICK");
 	}
 
 	@After
@@ -76,20 +68,20 @@ public class DeleteGenreServiceTest {
 
 	@Test
 	public void testDeleteGenreSuccess() {
-		resp = deleteGenreService.deleteGenre(resp, genre1);
+		resp = deleteGenreService.deleteGenre(resp, "ACTN");
 		assertThat(resp.getStatus().getCode(), is(equalTo(0)));
 	}
 
 	@Test
 	public void testDeleteGenreWithNoIdFailure() {
-		resp = deleteGenreService.deleteGenre(resp, genre3);
+		resp = deleteGenreService.deleteGenre(resp, null);
 		assertThat(resp.getStatus().getCode(), is(equalTo(1)));
 		assertThat(resp.getStatus().getMessages().get(0), is(equalTo("I'm not sure what Genre you are trying to delete. Please try again.")));
 	}
 
 	@Test
 	public void testDeleteNonExistantGenreFailure() {
-		resp = deleteGenreService.deleteGenre(resp, genre2);
+		resp = deleteGenreService.deleteGenre(resp, "CHICK");
 		assertThat(resp.getStatus().getCode(), is(equalTo(1)));
 		assertThat(resp.getStatus().getMessages().get(0), is(equalTo("Genre cannot be deleted as it does not exist.")));
 	}

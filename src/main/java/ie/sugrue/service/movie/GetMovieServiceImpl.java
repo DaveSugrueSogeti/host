@@ -91,15 +91,14 @@ public class GetMovieServiceImpl implements GetMovieService {
 	}
 
 	@Override
-	public ResponseWrapper getMovies(ResponseWrapper resp, String category_id) {
+	public ResponseWrapper getMovies(ResponseWrapper resp, String genreId) {
 
 		ArrayList<Movie> movies = new ArrayList<Movie>();
 		try {
-
-			if (category_id.equals("*")) {
+			if (genreId.equals("*")) {
 				movies = movieRepo.getMovies();
 			} else {
-				movies = movieRepo.getMovies(category_id);
+				movies = movieRepo.getMovies(genreId);
 			}
 			resp.setObjects(movies);
 
