@@ -1,5 +1,6 @@
 package ie.sugrue.service.user;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class DeleteUserServiceImpl implements DeleteUserService {
 		try {
 			if (Utils.isNotNull(id))
 			{
-				if (Utils.isValidEmailAddress(id)){
+				if (EmailValidator.getInstance().isValid(id)){
 					String email = id;
 					userRepo.deleteUser(email);
 				}

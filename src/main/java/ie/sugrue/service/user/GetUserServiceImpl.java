@@ -1,5 +1,7 @@
 package ie.sugrue.service.user;
 
+
+import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class GetUserServiceImpl implements GetUserService {
 		
 		if (Utils.isNotNull(id))
 		{
-			if (Utils.isValidEmailAddress(id)){
+			if (EmailValidator.getInstance().isValid(id)){
 				return getUserByEmail(id);
 			}
 			else {
@@ -55,7 +57,7 @@ public class GetUserServiceImpl implements GetUserService {
 		
 		if (Utils.isNotNull(id))
 		{
-			if (Utils.isValidEmailAddress(id)){
+			if (EmailValidator.getInstance().isValid(id)){
 				return getUserByEmail(resp, id);
 			}
 			else {
