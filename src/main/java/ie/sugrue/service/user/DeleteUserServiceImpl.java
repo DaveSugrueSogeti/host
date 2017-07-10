@@ -9,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import ie.sugrue.domain.ResponseWrapper;
-import ie.sugrue.domain.User;
 import ie.sugrue.repository.UserRepository;
 import ie.sugrue.utils.Utils;
 
@@ -30,18 +29,18 @@ public class DeleteUserServiceImpl implements DeleteUserService {
 		try {
 			if (Utils.isNotNull(id))
 			{
-				if (id.contains("@")){
+				if (Utils.isValidEmailAddress(id)){
 					String email = id;
 					userRepo.deleteUser(email);
 				}
 				else {
 					try{
 						userId = Long.valueOf(id);
+						userRepo.deleteUser(userId);
 					} catch (NumberFormatException nfe){
 						log.error("Cannot identify user based on id of {} to be deleted when trying to delete from Database", id, nfe);
 						resp.getStatus().updateStatus(1, "I'm not sure what User you are trying to delete. Please try again.");
 					}
-					userRepo.deleteUser(userId);
 				}
 			} else {
 				log.error("Cannot identify user based on id of {} to be deleted when trying to delete from Database", id);

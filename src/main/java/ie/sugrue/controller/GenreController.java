@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ie.sugrue.domain.Genre;
@@ -39,31 +38,31 @@ public class GenreController extends PrimaryController {
 	@Autowired
 	DeleteGenreService		deleteGenreService;
 
-	@RequestMapping("/{}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseWrapper getGenre(@PathVariable String id) {
 		return getGenreService.getGenre(resp, id);
 	}
 	
-	@RequestMapping("")
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseWrapper getGenre() {
 		return getGenreService.getGenres(resp);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseWrapper createGenre(@RequestBody Genre genre) {
 		log.info("CREATING -> {}", genre);
 
 		return createGenreService.createGenre(resp, genre);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseWrapper updateGenre(@RequestBody Genre genre) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseWrapper updateGenre(@PathVariable String id, @RequestBody Genre genre) {
 		log.info("UPDATING -> {}", genre);
 
 		return updateGenreService.updateGenre(resp, genre);
 	}
 
-	@RequestMapping(value = "/{}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseWrapper deleteGenre(@PathVariable String id) {
 		log.info("DELETING Genre with id -> {}", id);
 		return deleteGenreService.deleteGenre(resp, id);

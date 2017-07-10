@@ -39,7 +39,7 @@ public class MovieController extends PrimaryController {
 	@Autowired
 	DeleteMovieService		deleteMovieService;
 
-	@RequestMapping("/{id}")
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseWrapper getMovie(@PathVariable int id) {
 		ResponseWrapper resp2 = getMovieService.getMovie(resp, id);
 		log.info("Called:: /movies/" + id);
@@ -47,7 +47,7 @@ public class MovieController extends PrimaryController {
 		return resp2;
 	}
 
-	@RequestMapping("")
+	@RequestMapping(value="", method = RequestMethod.GET)
 	public ResponseWrapper getMovie(@RequestParam(value = "genreId", defaultValue = "") String genreId) {
 		// If no Category id specified, bring them all back (default)
 		if (genreId.equals("")) {
@@ -60,17 +60,16 @@ public class MovieController extends PrimaryController {
 		return resp;
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public ResponseWrapper createMovie(@PathVariable int id, @RequestBody Movie movie) {
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseWrapper createMovie(@RequestBody Movie movie) {
 		log.info("CREATING -> {}", movie);
 
 		return createMovieService.createMovie(resp, movie);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseWrapper updateMovie(@PathVariable int id, @RequestBody Movie movie) {
 		log.info("UPDATING -> {}", movie);
-
 		return updateMovieService.updateMovie(resp, movie);
 	}
 

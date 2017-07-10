@@ -20,7 +20,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ie.sugrue.domain.Movie;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.repository.MovieRepository;
 

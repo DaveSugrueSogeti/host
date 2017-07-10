@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import ie.sugrue.domain.Movie;
-import ie.sugrue.domain.ResponseWrapper;
-import ie.sugrue.domain.Status;
 import ie.sugrue.utils.GatewayConnector;
 
 public class MoviesGateway {

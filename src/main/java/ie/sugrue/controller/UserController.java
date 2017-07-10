@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ie.sugrue.domain.ResponseWrapper;
@@ -39,25 +38,20 @@ public class UserController extends PrimaryController {
 	@Autowired
 	DeleteUserService		deleteUserService;
 
-	@RequestMapping("/{id}")
-	public ResponseWrapper user(@PathVariable int id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseWrapper user(@PathVariable String id) {
 		return getUserService.getUser(resp, id);
 	}
 
-	/*
-	 * @RequestMapping(value = "/user/create", method = RequestMethod.POST) public void createUser(@ModelAttribute User user, Model model) {
-	 * System.out.println("Posting..."); model.addAttribute("user", user); MySQLUserRepositoryImpl.createUser(user); return; }
-	 */
-
-	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseWrapper create(@RequestBody User user) {
 		log.info("CREATING -> {}", user);
 
 		return createUserService.createUser(resp, user);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseWrapper updateUser(@RequestBody User user) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseWrapper updateUser(@PathVariable int id, @RequestBody User user) {
 		log.info("UPDATING -> {}", user);
 
 		return updateUserService.updateUser(resp, user);

@@ -3,6 +3,8 @@ package ie.sugrue.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ie.sugrue.domain.ResponseWrapper;
+
 public class Utils {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -29,5 +31,11 @@ public class Utils {
 
 		return false;
 	}
-
+	
+	public static Boolean isValidEmailAddress(String email) {
+		if (email.contains("@")){
+			return true;
+		}
+		return false;
+	}
 }

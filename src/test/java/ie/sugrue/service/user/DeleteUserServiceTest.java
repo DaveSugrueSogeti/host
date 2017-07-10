@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
-import java.sql.Date;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ie.sugrue.domain.ResponseWrapper;
-import ie.sugrue.domain.User;
 import ie.sugrue.repository.UserRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)

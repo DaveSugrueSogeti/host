@@ -8,7 +8,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import ie.sugrue.domain.Movie;
 import ie.sugrue.domain.ResponseWrapper;
 import ie.sugrue.repository.MovieRepository;
 
