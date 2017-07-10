@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,9 +62,10 @@ public class CreateMovieServiceTest {
 	@Before
 	public void setup() {
 		resp = new ResponseWrapper();
-
-		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75);
-		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80);
+		LocalDate dateWatched = LocalDate.of(2017, Month.JANUARY, 18);
+		
+		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75, dateWatched);
+		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80, null);
 
 		doNothing().when(movieRepo).createMovie(movie1);
 		doThrow(new DuplicateKeyException(null)).when(movieRepo).createMovie(movie2);

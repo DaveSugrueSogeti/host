@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doThrow;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,12 +72,14 @@ public class UpdateMovieServiceTest {
 	public void setup() {
 		resp = new ResponseWrapper();
 
-		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75);
-		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80);
+		LocalDate dateWatched = LocalDate.of(2017, Month.JANUARY, 18);
+		
+		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75, dateWatched);
+		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80, null);
 
-		oldMovie = new Movie(3, "ACTN", "Test Name 3", "B", "Testing this 3", 110, "test3.jpg", 80);
-		movieWithNulls = new Movie(3, "ACTN", "Test Name 4", null, null, null, "test3.jpg", 80);
-		populatedMovie = new Movie(3, "ACTN", "Test Name 4", "B", "Testing this 3", 110, "test3.jpg", 80);
+		oldMovie = new Movie(3, "ACTN", "Test Name 3", "B", "Testing this 3", 110, "test3.jpg", 80, dateWatched);
+		movieWithNulls = new Movie(3, "ACTN", "Test Name 4", null, null, null, "test3.jpg", 80, null);
+		populatedMovie = new Movie(3, "ACTN", "Test Name 4", "B", "Testing this 3", 110, "test3.jpg", 80, dateWatched);
 
 		// doNothing().when(movieRepo).updateMovie(movie1);
 		doThrow(new EmptyResultDataAccessException(0)).when(movieRepo).updateMovie(movie2);

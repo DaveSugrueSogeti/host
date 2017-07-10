@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,13 +48,15 @@ public class ResponseWrapperTest {
 
 	@Test
 	public void testToString() {
-		Movie movie1 = new Movie(1, "ACTN", "Test Name", "B", "Testing this", 100, "test.jpg", 75);
-		Movie movie2 = new Movie(2, "COMDY", "Test Name 2", "B", "Testing this again", 120, "test2.jpg", 85);
+		LocalDate lastWatched = LocalDate.of(2017, Month.JANUARY, 18);
+		Movie movie1 = new Movie(1, "ACTN", "Test Name", "B", "Testing this", 100, "test.jpg", 75, lastWatched);
+		lastWatched = LocalDate.of(2017, Month.JANUARY, 19);
+		Movie movie2 = new Movie(2, "COMDY", "Test Name 2", "B", "Testing this again", 120, "test2.jpg", 85, lastWatched);
 		resp.addObject(movie1);
 		resp.addObject(movie2);
 
 		assertEquals(
-				"ResponseWrapper [status=Status [code=0, messages=[Success]], objects=[Movie [id=1, genreId=ACTN, name=Test Name, format=B, notes=Testing this, duration=100, image=test.jpg, rating=75], Movie [id=2, genreId=COMDY, name=Test Name 2, format=B, notes=Testing this again, duration=120, image=test2.jpg, rating=85]]]",
+				"ResponseWrapper [status=Status [code=0, messages=[Success]], objects=[Movie [id=1, genreId=ACTN, name=Test Name, format=B, notes=Testing this, duration=100, image=test.jpg, rating=75, lastWatched=2017-01-18], Movie [id=2, genreId=COMDY, name=Test Name 2, format=B, notes=Testing this again, duration=120, image=test2.jpg, rating=85, lastWatched=2017-01-19]]]",
 				resp.toString());
 	}
 

@@ -1,5 +1,7 @@
 package ie.sugrue.domain;
 
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +14,9 @@ public class Movie {
 	private Integer			duration;
 	private String			image;
 	private Integer			rating;
+	private LocalDate		lastWatched;
 
-	public Movie(int id, String genreId, String name, String format, String notes, Integer duration, String image, Integer rating) {
+	public Movie(int id, String genreId, String name, String format, String notes, Integer duration, String image, Integer rating, LocalDate lastWatched) {
 		super();
 		this.id = id;
 		this.genreId = genreId;
@@ -23,6 +26,7 @@ public class Movie {
 		this.duration = duration;
 		this.image = image;
 		this.rating = rating;
+		this.lastWatched = lastWatched;
 	}
 
 	public Movie() {
@@ -93,10 +97,19 @@ public class Movie {
 		this.rating = rating;
 	}
 
+	public LocalDate getLastWatched() {
+		return lastWatched;
+	}
+
+	public void setLastWatched(LocalDate lastWatched) {
+		this.lastWatched = lastWatched;
+	}
+
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", genreId=" + genreId + ", name=" + name + ", format=" + format + ", notes=" + notes + ", duration=" + duration + ", image=" + image
-				+ ", rating=" + rating + "]";
+		return "Movie [id=" + id + ", genreId=" + genreId + ", name=" + name + ", format=" + format + ", notes=" + notes
+				+ ", duration=" + duration + ", image=" + image + ", rating=" + rating + ", lastWatched=" + lastWatched
+				+ "]";
 	}
 
 	@Override
@@ -108,6 +121,7 @@ public class Movie {
 		result = prime * result + ((genreId == null) ? 0 : genreId.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((lastWatched == null) ? 0 : lastWatched.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
@@ -116,68 +130,55 @@ public class Movie {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Movie other = (Movie) obj;
 		if (duration == null) {
-			if (other.duration != null) {
+			if (other.duration != null)
 				return false;
-			}
-		} else if (!duration.equals(other.duration)) {
+		} else if (!duration.equals(other.duration))
 			return false;
-		}
 		if (format == null) {
-			if (other.format != null) {
+			if (other.format != null)
 				return false;
-			}
-		} else if (!format.equals(other.format)) {
+		} else if (!format.equals(other.format))
 			return false;
-		}
 		if (genreId == null) {
-			if (other.genreId != null) {
+			if (other.genreId != null)
 				return false;
-			}
-		} else if (!genreId.equals(other.genreId)) {
+		} else if (!genreId.equals(other.genreId))
 			return false;
-		}
-		if (id != other.id) {
+		if (id != other.id)
 			return false;
-		}
 		if (image == null) {
-			if (other.image != null) {
+			if (other.image != null)
 				return false;
-			}
-		} else if (!image.equals(other.image)) {
+		} else if (!image.equals(other.image))
 			return false;
-		}
+		if (lastWatched == null) {
+			if (other.lastWatched != null)
+				return false;
+		} else if (!lastWatched.equals(other.lastWatched))
+			return false;
 		if (name == null) {
-			if (other.name != null) {
+			if (other.name != null)
 				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!name.equals(other.name))
 			return false;
-		}
 		if (notes == null) {
-			if (other.notes != null) {
+			if (other.notes != null)
 				return false;
-			}
-		} else if (!notes.equals(other.notes)) {
+		} else if (!notes.equals(other.notes))
 			return false;
-		}
 		if (rating == null) {
-			if (other.rating != null) {
+			if (other.rating != null)
 				return false;
-			}
-		} else if (!rating.equals(other.rating)) {
+		} else if (!rating.equals(other.rating))
 			return false;
-		}
 		return true;
 	}
 

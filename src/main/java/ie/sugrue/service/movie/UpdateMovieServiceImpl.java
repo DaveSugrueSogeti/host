@@ -72,6 +72,9 @@ public class UpdateMovieServiceImpl implements UpdateMovieService {
 		if (Utils.isNull(movie.getRating())) {
 			movie.setRating(previousMovieDetails.getRating());
 		}
+		if (Utils.isNull(movie.getLastWatched())) {
+			movie.setLastWatched(previousMovieDetails.getLastWatched());
+		}
 
 		return movie;
 	}

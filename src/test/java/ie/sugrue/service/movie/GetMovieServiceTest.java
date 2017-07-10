@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -65,9 +67,11 @@ public class GetMovieServiceTest {
 		resp1 = new ResponseWrapper();
 		resp2 = new ResponseWrapper();
 
-		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75);
-		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80);
-		movie3 = new Movie(3, "COMDY", "Test Name 3", "B", "Testing this 3", 120, "test3.jpg", 85);
+		LocalDate dateWatched = LocalDate.of(2017, Month.JANUARY, 18);
+		
+		movie1 = new Movie(1, "ACTN", "Test Name 1", "B", "Testing this 1", 100, "test1.jpg", 75, dateWatched);
+		movie2 = new Movie(2, "ACTN", "Test Name 2", "B", "Testing this 2", 110, "test2.jpg", 80, null);
+		movie3 = new Movie(3, "COMDY", "Test Name 3", "B", "Testing this 3", 120, "test3.jpg", 85, null);
 
 		allMovies = new ArrayList<Movie>();
 		allMovies.add(movie1);
